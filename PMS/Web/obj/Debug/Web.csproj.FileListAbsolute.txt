@@ -85,3 +85,15 @@ D:\5 курс\диплом\diplom\PMS\Web\bin\zh-Hant\System.Spatial.resources.d
 D:\5 курс\диплом\diplom\PMS\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 D:\5 курс\диплом\diplom\PMS\Web\obj\Debug\Web.dll
 D:\5 курс\диплом\diplom\PMS\Web\obj\Debug\Web.pdb
+D:\5 курс\диплом\diplom\PMS\Web\bin\BLL.dll
+D:\5 курс\диплом\diplom\PMS\Web\bin\DI.dll
+D:\5 курс\диплом\diplom\PMS\Web\bin\Ninject.dll
+D:\5 курс\диплом\diplom\PMS\Web\bin\DAL.ORM.dll
+D:\5 курс\диплом\diplom\PMS\Web\bin\ORM.dll
+D:\5 курс\диплом\diplom\PMS\Web\bin\BLL.pdb
+D:\5 курс\диплом\diplom\PMS\Web\bin\DI.pdb
+D:\5 курс\диплом\diplom\PMS\Web\bin\Ninject.xml
+D:\5 курс\диплом\diplom\PMS\Web\bin\DAL.ORM.pdb
+D:\5 курс\диплом\diplom\PMS\Web\bin\ORM.pdb
+D:\5 курс\диплом\diplom\PMS\Web\bin\EntityFramework.SqlServer.dll
+D:\5 курс\диплом\diplom\PMS\Web\bin\EntityFramework.SqlServer.xml

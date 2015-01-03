@@ -1,0 +1,14 @@
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\obj\Debug\DAL.ORM.csprojResolveAssemblyReference.cache
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\DAL.ORM.dll.config
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\DAL.ORM.dll
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\DAL.ORM.pdb
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\BLL.dll
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\EntityFramework.dll
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\EntityFramework.SqlServer.dll
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\ORM.dll
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\BLL.pdb
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\ORM.pdb
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\EntityFramework.xml
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\bin\Debug\EntityFramework.SqlServer.xml
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\obj\Debug\DAL.ORM.dll
+D:\5 курс\диплом\diplom\PMS\DAL.ORM\obj\Debug\DAL.ORM.pdb

@@ -1,0 +1,5 @@
+D:\5 курс\диплом\diplom\PMS\BLL\bin\Debug\BLL.dll
+D:\5 курс\диплом\diplom\PMS\BLL\bin\Debug\BLL.pdb
+D:\5 курс\диплом\diplom\PMS\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+D:\5 курс\диплом\diplom\PMS\BLL\obj\Debug\BLL.dll
+D:\5 курс\диплом\diplom\PMS\BLL\obj\Debug\BLL.pdb
