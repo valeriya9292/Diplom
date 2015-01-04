@@ -1,4 +1,4 @@
-﻿namespace ORM.Properties.Model.Enums
+﻿namespace ORM.Model.Enums
 {
     public enum OrmTaskStatus
     {

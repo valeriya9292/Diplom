@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using BLL.DomainModel.Entities;
 using BLL.Repositories;
 using DAL.ORM.Convertions;
-using ORM.Properties.Model;
+using ORM.Model;
 
 namespace DAL.ORM.Repositories
 {
@@ -51,10 +53,16 @@ namespace DAL.ORM.Repositories
                 var oldComment = context.Comments.FirstOrDefault(c => c.Id == comment.Id);
                 if (oldComment != null)
                 {
-                    context.Comments.Remove(oldComment);
+                    oldComment.Description = comment.Description;
+
+                    context.Entry(oldComment).State = EntityState.Modified;
+                    context.SaveChanges();
                 }
-                context.Comments.Add(comment.ToOrmComment());
-                context.SaveChanges();
+                else
+                {
+                    context.Comments.Add(comment.ToOrmComment());
+                }
+                context.SaveChanges(); 
             }
         }
     }

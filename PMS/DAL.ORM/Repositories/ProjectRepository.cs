@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using BLL.DomainModel.Entities;
 using BLL.Repositories;
 using DAL.ORM.Convertions;
-using ORM.Properties.Model;
+using ORM.Model;
+using ORM.Model.Enums;
 
 namespace DAL.ORM.Repositories
 {
@@ -22,7 +25,7 @@ namespace DAL.ORM.Repositories
         {
             using (var context = new PmsDbContext())
             {
-                var projectMember = context.ProjectMembers.FirstOrDefault(pm => pm.Id == projectId && pm.UserId == userId );
+                var projectMember = context.ProjectMembers.FirstOrDefault(pm => pm.Id == projectId && pm.UserId == userId);
                 if (projectMember == null)
                     return;
                 context.ProjectMembers.Remove(projectMember);
@@ -70,12 +73,23 @@ namespace DAL.ORM.Repositories
         {
             using (var context = new PmsDbContext())
             {
-                var oldProject = context.Projects.FirstOrDefault(u => u.Id == project.Id);
+                var oldProject = context.Projects.FirstOrDefault(c => c.Id == project.Id);
                 if (oldProject != null)
                 {
-                    context.Projects.Remove(oldProject);
+                    oldProject.Description = project.Description;
+                    oldProject.Duration = project.Duration;
+                    oldProject.Name = project.Name;
+                    oldProject.Progress = project.Progress;
+                    oldProject.StartDate = project.StartDate;
+                    oldProject.Status = (OrmProjectStatus)project.Status;
+
+                    context.Entry(oldProject).State = EntityState.Modified;
+                    context.SaveChanges();
                 }
-                context.Projects.Add(project.ToOrmProject());
+                else
+                {
+                    context.Projects.Add(project.ToOrmProject());
+                }
                 context.SaveChanges();
             }
         }

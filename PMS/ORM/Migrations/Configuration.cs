@@ -1,3 +1,5 @@
+using ORM.Model;
+
 namespace ORM.Migrations
 {
     using System;
@@ -5,7 +7,7 @@ namespace ORM.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<ORM.Properties.Model.PmsDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<PmsDbContext>
     {
         public Configuration()
         {
@@ -13,7 +15,7 @@ namespace ORM.Migrations
             ContextKey = "ORM.Properties.Model.PmsDbContext";
         }
 
-        protected override void Seed(ORM.Properties.Model.PmsDbContext context)
+        protected override void Seed(PmsDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

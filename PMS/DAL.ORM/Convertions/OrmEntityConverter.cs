@@ -1,7 +1,7 @@
 ﻿using BLL.DomainModel.Entities;
 using BLL.DomainModel.Enums;
-using ORM.Properties.Model;
-using ORM.Properties.Model.Enums;
+using ORM.Model;
+using ORM.Model.Enums;
 
 namespace DAL.ORM.Convertions
 {

@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using BLL.DomainModel.Entities;
 using BLL.Repositories;
 using DAL.ORM.Convertions;
-using ORM.Properties.Model;
+using ORM.Model;
 
 namespace DAL.ORM.Repositories
 {
@@ -43,9 +45,24 @@ namespace DAL.ORM.Repositories
                 var oldTimeLog = context.TimeLogs.FirstOrDefault(u => u.Id == timeLog.Id);
                 if (oldTimeLog != null)
                 {
-                    context.TimeLogs.Remove(oldTimeLog);
+                    oldTimeLog.HoursInMonday = timeLog.HoursInMonday;
+                    oldTimeLog.HoursInTuesday = timeLog.HoursInThursday;
+                    oldTimeLog.HoursInWednesday = timeLog.HoursInWednesday;
+                    oldTimeLog.HoursInThursday = timeLog.HoursInThursday;
+                    oldTimeLog.HoursInFriday = timeLog.HoursInFriday;
+                    oldTimeLog.HoursInSaturday = timeLog.HoursInSaturday;
+                    oldTimeLog.HoursInSunday = timeLog.HoursInSunday;
+                    oldTimeLog.Title = timeLog.Title;
+
+                    //oldTimeLog.Week = timeLog.Week;
+                    //oldTimeLog.Year = timeLog.Year;
+
+                    context.Entry(oldTimeLog).State = EntityState.Modified;
                 }
-                context.TimeLogs.Add(timeLog.ToOrmTimeLog());
+                else
+                {
+                    context.TimeLogs.Add(timeLog.ToOrmTimeLog());
+                }
                 context.SaveChanges();
             }
         }

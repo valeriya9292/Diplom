@@ -58,18 +58,22 @@
     <Compile Include="Migrations\201501032105582_birhthday_nullable.Designer.cs">
       <DependentUpon>201501032105582_birhthday_nullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501042031521_revert.cs" />
+    <Compile Include="Migrations\201501042031521_revert.Designer.cs">
+      <DependentUpon>201501042031521_revert.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Properties\Model\Enums\OrmRole.cs" />
-    <Compile Include="Properties\Model\Enums\OrmTaskStatus.cs" />
-    <Compile Include="Properties\Model\OrmComment.cs" />
-    <Compile Include="Properties\Model\PmsDbContext.cs" />
-    <Compile Include="Properties\Model\OrmProject.cs" />
-    <Compile Include="Properties\Model\OrmProjectMember.cs" />
-    <Compile Include="Properties\Model\OrmTask.cs" />
-    <Compile Include="Properties\Model\OrmTaskAssignee.cs" />
-    <Compile Include="Properties\Model\OrmTimeLog.cs" />
-    <Compile Include="Properties\Model\OrmUser.cs" />
-    <Compile Include="Properties\Model\Enums\OrmProjectStatus.cs" />
+    <Compile Include="Model\Enums\OrmRole.cs" />
+    <Compile Include="Model\Enums\OrmTaskStatus.cs" />
+    <Compile Include="Model\OrmComment.cs" />
+    <Compile Include="Model\PmsDbContext.cs" />
+    <Compile Include="Model\OrmProject.cs" />
+    <Compile Include="Model\OrmProjectMember.cs" />
+    <Compile Include="Model\OrmTask.cs" />
+    <Compile Include="Model\OrmTaskAssignee.cs" />
+    <Compile Include="Model\OrmTimeLog.cs" />
+    <Compile Include="Model\OrmUser.cs" />
+    <Compile Include="Model\Enums\OrmProjectStatus.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +89,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501032105582_birhthday_nullable.resx">
       <DependentUpon>201501032105582_birhthday_nullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501042031521_revert.resx">
+      <DependentUpon>201501042031521_revert.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

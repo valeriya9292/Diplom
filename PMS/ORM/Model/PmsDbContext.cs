@@ -1,10 +1,10 @@
 ﻿using System.Data.Entity;
 
-namespace ORM.Properties.Model
+namespace ORM.Model
 {
     public class PmsDbContext : DbContext
     {
-        public PmsDbContext() : base("PmsDatabase") { }
+        public PmsDbContext() : base("PmsDb") { }
 
         public DbSet<OrmProject> Projects { get; set; }
         public DbSet<OrmUser> Users { get; set; }

@@ -14,8 +14,6 @@ D:\Учёба\ASP.NET MVC\FileStorage\DI\obj\Debug\DI.csprojResolveAssemblyRefer
 D:\Учёба\ASP.NET MVC\FileStorage\DI\obj\Debug\DI.dll
 D:\Учёба\ASP.NET MVC\FileStorage\DI\obj\Debug\DI.pdb
 D:\5 курс\диплом\diplom\PMS\DI\obj\Debug\DI.csprojResolveAssemblyReference.cache
-D:\5 курс\диплом\diplom\PMS\DI\obj\Debug\DI.dll
-D:\5 курс\диплом\diplom\PMS\DI\obj\Debug\DI.pdb
 D:\5 курс\диплом\diplom\PMS\DI\bin\Debug\DI.dll
 D:\5 курс\диплом\diplom\PMS\DI\bin\Debug\DI.pdb
 D:\5 курс\диплом\diplom\PMS\DI\bin\Debug\BLL.dll
@@ -28,3 +26,5 @@ D:\5 курс\диплом\diplom\PMS\DI\bin\Debug\DAL.ORM.pdb
 D:\5 курс\диплом\diplom\PMS\DI\bin\Debug\Ninject.xml
 D:\5 курс\диплом\diplom\PMS\DI\bin\Debug\ORM.pdb
 D:\5 курс\диплом\diplom\PMS\DI\bin\Debug\EntityFramework.xml
+D:\5 курс\диплом\diplom\PMS\DI\obj\Debug\DI.dll
+D:\5 курс\диплом\diplom\PMS\DI\obj\Debug\DI.pdb

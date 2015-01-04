@@ -12,6 +12,5 @@ namespace BLL.Repositories
         void Delete(int userId);
 
         void Save(User user);
-   
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
-using ORM.Properties.Model.Enums;
+using ORM.Model.Enums;
 
-namespace ORM.Properties.Model
+namespace ORM.Model
 {
     public class OrmUser
     {

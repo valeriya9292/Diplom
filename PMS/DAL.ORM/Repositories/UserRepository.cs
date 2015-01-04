@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using BLL.DomainModel.Entities;
 using BLL.Repositories;
 using DAL.ORM.Convertions;
-using ORM.Properties.Model;
+using ORM.Model;
 
 namespace DAL.ORM.Repositories
 {
@@ -52,9 +54,21 @@ namespace DAL.ORM.Repositories
                 var oldUser = context.Users.FirstOrDefault(u => u.Login == user.Login);
                 if (oldUser != null)
                 {
-                    context.Users.Remove(oldUser);
+                    oldUser.FirstName = user.FirstName;
+                    oldUser.LastName = user.LastName;
+                    oldUser.Phone = user.Phone;
+                    oldUser.Skype = user.Skype;
+                    oldUser.Avatar = user.Avatar;
+                    oldUser.Birthday = user.Birthday;
+                    oldUser.Email = user.Email;
+                    //todo: add role for pm and password for user
+
+                    context.Entry(oldUser).State = EntityState.Modified;;
                 }
-                context.Users.Add(user.ToOrmUser());
+                else
+                {
+                    context.Users.Add(user.ToOrmUser()); 
+                }
                 context.SaveChanges();
             }
         }

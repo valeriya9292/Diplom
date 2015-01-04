@@ -1,4 +1,6 @@
-﻿namespace ORM.Properties.Model
+﻿using System;
+
+namespace ORM.Model
 {
     public class OrmProjectMember
     {

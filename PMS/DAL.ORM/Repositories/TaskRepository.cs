@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using BLL.Repositories;
 using DAL.ORM.Convertions;
-using ORM.Properties.Model;
+using ORM.Model;
+using ORM.Model.Enums;
 using Task = BLL.DomainModel.Entities.Task;
 
 namespace DAL.ORM.Repositories
@@ -48,12 +51,23 @@ namespace DAL.ORM.Repositories
         {
             using (var context = new PmsDbContext())
             {
-                var oldTask = context.Projects.FirstOrDefault(u => u.Id == task.Id);
+                var oldTask = context.Tasks.FirstOrDefault(u => u.Id == task.Id);
                 if (oldTask != null)
                 {
-                    context.Projects.Remove(oldTask);
+                    oldTask.Description = task.Description;
+                    oldTask.Duration = task.Duration;
+                    oldTask.Name = task.Name;
+                    oldTask.Progress = task.Progress;
+                    oldTask.StartDate = task.StartDate;
+                    oldTask.Status = (OrmProjectStatus) task.Status;
+
+                    context.Entry(oldTask).State = EntityState.Modified;
+                    context.SaveChanges();
                 }
-                context.Tasks.Add(task.ToOrmTask());
+                else
+                {
+                    context.Tasks.Add(task.ToOrmTask());
+                }
                 context.SaveChanges();
             }
         }
