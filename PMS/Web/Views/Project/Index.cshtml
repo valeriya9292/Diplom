@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<input type="button" class="css-button" value="Create New Project" />
+<div data-bind="tree: projects"></div>
+
+
+@section Styles
+{
+    @Styles.Render("~/Content/themes/base/css")
+}
+@section Scripts{
+    <script type="text/javascript">
+        var pms = { projects: { dataManager: {} } };
+
+        $(document).ready(function () {
+            pms.projects.dataManager.urls = {
+                getProjects: '@Url.Action("GetProjects", "Project")',
+            };
+
+            var dataManager = new pms.projects.dataManager();
+            dataManager.getProjects(function (projectsJson) {
+                var model = new pms.projects.projectsViewModel({ projects: projectsJson });
+                ko.applyBindings(model);
+            });
+        });
+    </script>
+    <script src="@Url.Content("~/Scripts/lib/tree.jquery.js")"></script>
+    <script src="@Url.Content("~/Scripts/lib/jquery.cookie.js")"></script>
+    @Scripts.Render("~/bundles/projects")
+}
