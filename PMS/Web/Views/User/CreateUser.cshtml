@@ -1,0 +1,110 @@
+﻿@using BLL.DomainModel.Enums
+@model Web.Models.CreateUserModel
+
+@{
+    ViewBag.Title = "Create User";
+}
+
+<h2>Create User</h2>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<fieldset class="createForm">
+    <legend>User</legend>
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "css-form", enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <p>
+            @Html.LabelFor(model => model.FirstName)
+
+
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.LastName)
+
+
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Login)
+
+
+            @Html.EditorFor(model => model.Login)
+            @Html.ValidationMessageFor(model => model.Login)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Password)
+
+
+            @Html.EditorFor(model => model.Password)
+            @Html.ValidationMessageFor(model => model.Password)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.ConfirmPassword)
+
+
+            @Html.EditorFor(model => model.ConfirmPassword)
+            @Html.ValidationMessageFor(model => model.ConfirmPassword)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Email)
+
+
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Birthday)
+
+
+            @Html.EditorFor(model => model.Birthday)
+            @Html.ValidationMessageFor(model => model.Birthday)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Phone)
+
+
+            @Html.EditorFor(model => model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </p>
+
+        <p>
+            @Html.LabelFor(model => model.Skype)
+
+
+            @Html.EditorFor(model => model.Skype)
+            @Html.ValidationMessageFor(model => model.Skype)
+        </p>
+
+        <p>
+            @Html.LabelFor(m => m.Role)
+            @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(Role))))
+        </p>
+        <p>
+            @Html.LabelFor(m => m.Avatar)
+            <input id="register-avatar" type="file" name="ProfileImage" />
+
+        </p>
+
+        <p>
+            <input type="submit" value="Create" class="formbutton" />
+        </p>
+
+    }
+</fieldset>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

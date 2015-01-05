@@ -1,16 +1,15 @@
 ﻿<header>
-    <h1>@Html.ActionLink("your logo here", "About", "Home")</h1>
-    <div class="clear"></div>
+    <h1 class="inline">@Html.ActionLink("your logo here", "About", "Home")</h1>
     @if (Request.IsAuthenticated)
     {
-        <text>
-            Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })!
+        <div class="inline right">
+            Hello, @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })
             @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
             {
                 @Html.AntiForgeryToken()
-                <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+                <a class="right" href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
             }
-        </text>
+        </div>
     }
 </header>
 @if (Request.IsAuthenticated)

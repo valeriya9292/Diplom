@@ -193,6 +193,8 @@
     </Compile>
     <Compile Include="Infrastructure\Captcha.cs" />
     <Compile Include="Infrastructure\RandomUtil.cs" />
+    <Compile Include="Models\Convertions\ViewEntityConverter.cs" />
+    <Compile Include="Models\CreateUserModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -313,6 +315,7 @@
     <Content Include="Views\User\Create.cshtml" />
     <Content Include="Views\User\Edit.cshtml" />
     <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\CreateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

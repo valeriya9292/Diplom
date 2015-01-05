@@ -9,14 +9,11 @@
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
-
-
-
         <p>
-            @Html.LabelFor(model => model.Email)
+            @Html.LabelFor(model => model.Login)
 
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
+            @Html.EditorFor(model => model.Login)
+            @Html.ValidationMessageFor(model => model.Login)
         </p>
 
         <p>
@@ -25,13 +22,13 @@
             @Html.EditorFor(model => model.Password)
             @Html.ValidationMessageFor(model => model.Password)
         </p>
-        <p>
+        @*<p>
             @Html.LabelFor(model => model.RememberMe)
 
 
             @Html.EditorFor(model => model.RememberMe)
             @Html.ValidationMessageFor(model => model.RememberMe)
-        </p>
+        </p>*@
 
 
         <p>

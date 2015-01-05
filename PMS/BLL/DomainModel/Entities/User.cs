@@ -9,7 +9,7 @@ namespace BLL.DomainModel.Entities
 
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public byte? [] Avatar { get; set; }
+        public byte[] Avatar { get; set; }
         public DateTime? Birthday { get; set; }
         public string Phone { get; set; }
         public string Skype { get; set; }

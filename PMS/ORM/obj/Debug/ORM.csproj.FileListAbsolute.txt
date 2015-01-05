@@ -13,3 +13,4 @@ D:\5 курс\диплом\diplom\PMS\ORM\obj\Debug\ORM.dll
 D:\5 курс\диплом\diplom\PMS\ORM\obj\Debug\ORM.pdb
 D:\5 курс\диплом\diplom\PMS\ORM\obj\Debug\ORM.csprojResolveAssemblyReference.cache
 D:\5 курс\диплом\diplom\PMS\ORM\obj\Debug\ORM.Migrations.revert.resources
+D:\5 курс\диплом\diplom\PMS\ORM\obj\Debug\ORM.Migrations.remove_nullable_from_avatar.resources

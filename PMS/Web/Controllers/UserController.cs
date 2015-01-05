@@ -1,6 +1,10 @@
 ﻿using System;
+using System.IO;
+using System.Linq;
 using System.Web.Mvc;
 using BLL.Services;
+using Web.Models;
+using Web.Models.Convertions;
 
 namespace Web.Controllers
 {
@@ -28,21 +32,34 @@ namespace Web.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View("CreateUser");
         }
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(CreateUserModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                var anyUser = service.FindAllUsers().Any(u => u.Login.Contains(model.Login));
+                if (anyUser)
+                {
+                    ModelState.AddModelError("Login", "User already exists");
+                    return View("CreateUser", model);
+                }
+                try
+                {
+                    var user = model.ToEntityUser();
+                    service.SaveUser(user);
 
-                return RedirectToAction("Index");
+                    return RedirectToAction("Index", "User");
+                }
+
+
+                catch
+                {
+                    return View();
+                }
             }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
 
         //

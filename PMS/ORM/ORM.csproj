@@ -62,6 +62,10 @@
     <Compile Include="Migrations\201501042031521_revert.Designer.cs">
       <DependentUpon>201501042031521_revert.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501051939174_remove_nullable_from_avatar.cs" />
+    <Compile Include="Migrations\201501051939174_remove_nullable_from_avatar.Designer.cs">
+      <DependentUpon>201501051939174_remove_nullable_from_avatar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Enums\OrmRole.cs" />
     <Compile Include="Model\Enums\OrmTaskStatus.cs" />
@@ -92,6 +96,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501042031521_revert.resx">
       <DependentUpon>201501042031521_revert.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501051939174_remove_nullable_from_avatar.resx">
+      <DependentUpon>201501051939174_remove_nullable_from_avatar.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

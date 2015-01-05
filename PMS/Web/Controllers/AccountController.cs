@@ -28,15 +28,15 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 var provider = (CustomMembershipProvider)Membership.Provider;
-                if (provider.ValidateUser(viewModel.Email, viewModel.Password))
+                if (provider.ValidateUser(viewModel.Login, viewModel.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(viewModel.Email, viewModel.RememberMe);
+                    FormsAuthentication.SetAuthCookie(viewModel.Login, viewModel.RememberMe);
                     if (Url.IsLocalUrl(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
                     var roleProvider = new CustomRoleProvider();
-                    return roleProvider.IsUserInRole(viewModel.Email, Role.User) ? RedirectToAction("Contact", "Home") 
+                    return roleProvider.IsUserInRole(viewModel.Login, Role.User) ? RedirectToAction("Contact", "Home") 
                         : RedirectToAction("About", "Home");
                 }
                 ModelState.AddModelError("", "Incorrect email or password");
