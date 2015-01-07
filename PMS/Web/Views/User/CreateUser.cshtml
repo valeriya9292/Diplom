@@ -66,10 +66,7 @@
 
         <p>
             @Html.LabelFor(model => model.Birthday)
-
-
-            @Html.EditorFor(model => model.Birthday)
-            @Html.ValidationMessageFor(model => model.Birthday)
+            <input type="text" id="Birthday" name="Birthday" readonly="readonly">
         </p>
 
         <p>
@@ -92,10 +89,11 @@
             @Html.LabelFor(m => m.Role)
             @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(Role))))
         </p>
-        <p>
-            @Html.LabelFor(m => m.Avatar)
-            <input id="register-avatar" type="file" name="Avatar" />
+        <p class="lifile">
 
+            @Html.LabelFor(m => m.Avatar)
+            @Html.TextBoxFor(m => m.Avatar, new { type = "file" })
+            @Html.ValidationMessageFor(m => m.Avatar)
         </p>
 
         <p>
@@ -108,4 +106,10 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/avatar.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#Birthday").datepicker();
+        });
+    </script>
+    <script src='@Url.Content("~/Scripts/fileValidation.js")'></script>
 }

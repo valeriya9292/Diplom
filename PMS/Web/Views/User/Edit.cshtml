@@ -62,7 +62,10 @@
 
         <p>
             @Html.LabelFor(model => model.Birthday)
-            <input type="text" id="Birthday" name="Birthday" readonly="readonly" value="@Model.Birthday.Value.ToString("MM/dd/yyyy")">
+            @{
+        var date = Model.Birthday.HasValue ? Model.Birthday.Value.ToString(" mm/dd/yyyy") : string.Empty;
+            }
+            <input type="text" id="Birthday" name="Birthday" readonly="readonly" value="@date" />
         </p>
 
         <p>
@@ -99,10 +102,11 @@
             }
 
         </p>
-        <p>
-            @Html.LabelFor(m => m.Avatar)
-            <input id="register-avatar" type="file" name="Avatar" />
+        <p class="lifile">
 
+            @Html.LabelFor(m => m.Avatar)
+            @Html.TextBoxFor(m => m.Avatar, new { type = "file" })
+            @Html.ValidationMessageFor(m => m.Avatar)
         </p>
 
         <p>
@@ -118,8 +122,9 @@
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/avatar.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $("#Birthday").datepicker();
         });
     </script>
+    <script src='@Url.Content("~/Scripts/fileValidation.js")'></script>
 }

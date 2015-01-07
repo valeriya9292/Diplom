@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Web;
 using BLL.DomainModel.Enums;
 
@@ -43,7 +41,7 @@ namespace Web.Models
         public string Email { get; set; }
 
         [Display(Name = "Birthday")]
-        public DateTime? Birthday { get; set; } 
+        public DateTime? Birthday { get; set; }
 
         [Display(Name = "Phone")]
         public string Phone { get; set; }
@@ -51,7 +49,7 @@ namespace Web.Models
         [Display(Name = "Skype")]
         public string Skype { get; set; }
 
-        [Display(Name = "Add avatar")]
+        [Display(Name = "Add Avatar")]
         public HttpPostedFileBase Avatar { get; set; }
 
         [Display(Name = "Role")]
