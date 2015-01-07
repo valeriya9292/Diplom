@@ -74,6 +74,9 @@ p {
 a {
     color: #FF6633;
 }
+div.css-link a {
+    color: #FF6633 ;
+}
 
     a:hover {
         color: #FF4000;
@@ -454,7 +457,7 @@ footer .footer-bottom {
 .loginForm, .createForm {
     margin-left: auto;
     margin-right: auto;
-    width: 580px;
+    width: 600px;
     padding-bottom: 50px;
 }
 
@@ -510,4 +513,12 @@ tr:nth-child(odd) {
 
 .disabled {
     background-color: #ddd
+}
+
+.ui-dialog {
+    top: 20px !important;
+    width: 800px !important;
+}
+.ui-dialog-titlebar-close {
+  visibility: hidden;
 }

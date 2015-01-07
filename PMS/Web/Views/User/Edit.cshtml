@@ -1,14 +1,21 @@
 ﻿@using BLL.DomainModel.Enums
 @model Web.Models.EditUserModel
 
-@{
-    ViewBag.Title = "Edit";
-}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/ko")
+@Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Birthday").datepicker();
+    });
+</script>
+<script src='@Url.Content("~/Scripts/fileValidation.js")'></script>
 
-<h2>Edit User</h2>
-<div>
+<div class="css-link">
     @Html.ActionLink("Back to List", "Index")
 </div>
+
 <fieldset class="createForm">
     <legend>User</legend>
     @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "js-form", enctype = "multipart/form-data" }))
@@ -63,7 +70,7 @@
         <p>
             @Html.LabelFor(model => model.Birthday)
             @{
-        var date = Model.Birthday.HasValue ? Model.Birthday.Value.ToString(" mm/dd/yyyy") : string.Empty;
+                var date = Model.Birthday.HasValue ? Model.Birthday.Value.ToString(" mm/dd/yyyy") : string.Empty;
             }
             <input type="text" id="Birthday" name="Birthday" readonly="readonly" value="@date" />
         </p>
@@ -87,18 +94,18 @@
         <p>
             @Html.LabelFor(m => m.Role)
             @{
-        Role role;
-        Enum.TryParse(Roles.GetRolesForUser(User.Identity.Name).FirstOrDefault(), out role);
-        if (role == Role.Admin || role == Role.ProjectManager)
-        {
+                Role role;
+                Enum.TryParse(Roles.GetRolesForUser(User.Identity.Name).FirstOrDefault(), out role);
+                if (role == Role.Admin || role == Role.ProjectManager)
+                {
 
-            @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(Role))))
-        }
-        else
-        {
-            @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(Role))), new { @readonly = "readonly", disabled = "disabled", @class = "disabled" })
-                <input type="hidden" value="@Model.Role" name="Role">
-        }
+                    @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(Role))))
+                }
+                else
+                {
+                    @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(Role))), new { @readonly = "readonly", disabled = "disabled", @class = "disabled" })
+                    <input type="hidden" value="@Model.Role" name="Role">
+                }
             }
 
         </p>
@@ -115,16 +122,3 @@
 
     }
 </fieldset>
-
-
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/avatar.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $("#Birthday").datepicker();
-        });
-    </script>
-    <script src='@Url.Content("~/Scripts/fileValidation.js")'></script>
-}

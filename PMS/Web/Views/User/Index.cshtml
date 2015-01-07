@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    <a href="#" data-bind="event: { click: openCreate}">Create New</a>
 </p>
 
 
@@ -22,11 +22,41 @@
         <br>
         @item.Role
 
-
         <div>
-            @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+            <a href="#" data-bind="event: { click: function(){ openEdit({ id:'@item.Id' })}}">Edit</a>
+            <a href="#" data-bind="event: { click: function(){ openDelete({id:'@item.Id'})}}">Delete</a>
+            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
             @Html.ActionLink("Details", "Details", new { id = item.Id })
-            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </div>
     </div>
 }
+<div id="createDialog" data-bind="dialog: {autoOpen: false, title: 'Create user' }, dialogVisible: isCreateOpen">
+    <div data-bind="html:createContent"></div>
+</div>
+<div id="editDialog" data-bind="dialog: {autoOpen: false, title: 'Edit user' }, dialogVisible: isEditOpen">
+    <div data-bind="html:editContent"></div>
+</div>
+<div id="deleteDialog" data-bind="dialog: {autoOpen: false, title: 'Delete user' }, dialogVisible: isDeleteOpen">
+    <div data-bind="html:deleteContent"></div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        var pms = { users: {} };
+
+        $(document).ready(function () {
+            pms.users.dataManager.urls = {
+                getCreateForm: '@Url.Action("Create", "User")',
+                getEditForm: '@Url.Action("Edit", "User")',
+                getDeleteForm: '@Url.Action("Delete", "User")',
+            };
+
+            var model = new pms.users.usersViewModel();
+            ko.applyBindings(model);
+        });
+    </script>
+    @Scripts.Render("~/bundles/users")
+}
+

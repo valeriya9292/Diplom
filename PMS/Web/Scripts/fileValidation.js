@@ -56,7 +56,7 @@ $(function () {
             }
         }
         if (flag == false) {
-            $(".lifile > span").removeClass(validClass).addClass(invalidClass).text("only jpg, jpeg, png, gif, bmp extension file");
+            $(".lifile > span").removeClass(validClass).addClass(invalidClass).text("only jpg, jpeg, png, gif, bmp extension");
             return false;
         }
         else {

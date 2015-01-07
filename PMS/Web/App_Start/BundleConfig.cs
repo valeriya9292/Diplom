@@ -47,7 +47,8 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/projects").Include(
                       "~/Scripts/pages/project/*.js"));
             bundles.Add(new ScriptBundle("~/bundles/users").Include(
-                    "~/Scripts/pages/user/*.js"));
+                "~/Scripts/pages/user/dataManager.js",
+                "~/Scripts/pages/user/*.js"));
         }
     }
 }

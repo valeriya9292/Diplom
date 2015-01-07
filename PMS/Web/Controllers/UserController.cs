@@ -32,7 +32,7 @@ namespace Web.Controllers
 
         public ActionResult Create()
         {
-            return View("CreateUser");
+            return PartialView("CreateUser");
         }
         [HttpPost]
         public ActionResult Create(CreateUserModel model)
@@ -52,20 +52,18 @@ namespace Web.Controllers
 
                     return RedirectToAction("Index", "User");
                 }
-
-
                 catch
                 {
-                    return View();
+                    return PartialView("CreateUser");
                 }
             }
-            return View();
+            return PartialView("CreateUser");
         }
         public ActionResult Edit(int id)
         {
             var user = service.FindUserById(id);
             user.Password = string.Empty;
-            return View(user.ToViewEditUser());
+            return PartialView(user.ToViewEditUser());
         }
 
 
@@ -86,7 +84,7 @@ namespace Web.Controllers
         public ActionResult Delete(int id)
         {
             var user = service.FindUserById(id);
-            return View(user.ToViewUser());
+            return PartialView(user.ToViewUser());
         }
 
         [HttpPost]
