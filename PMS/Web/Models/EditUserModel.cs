@@ -7,7 +7,7 @@ using BLL.DomainModel.Enums;
 
 namespace Web.Models
 {
-    public class CreateUserModel
+    public class EditUserModel 
     {
         [ScaffoldColumn(false)]
         public int Id { get; set; }
@@ -23,16 +23,13 @@ namespace Web.Models
         public string LastName { get; set; }
 
         [Display(Name = "Login")]
-        [Required(ErrorMessage = "Login is required")]
         public string Login { get; set; }
 
-        [Required(ErrorMessage = "Enter password")]
         [StringLength(100, ErrorMessage = "At least {2} characters", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Required(ErrorMessage = "Confirm password")]
         [DataType(DataType.Password)]
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "Passwords must match")]
@@ -43,7 +40,7 @@ namespace Web.Models
         public string Email { get; set; }
 
         [Display(Name = "Birthday")]
-        public DateTime? Birthday { get; set; } 
+        public DateTime? Birthday { get; set; }
 
         [Display(Name = "Phone")]
         public string Phone { get; set; }
@@ -51,11 +48,10 @@ namespace Web.Models
         [Display(Name = "Skype")]
         public string Skype { get; set; }
 
-        [Display(Name = "Add avatar")]
+        [Display(Name = "Avatar")]
         public HttpPostedFileBase Avatar { get; set; }
 
         [Display(Name = "Role")]
         public Role Role { get; set; }
-
     }
 }

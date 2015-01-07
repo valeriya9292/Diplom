@@ -6,6 +6,7 @@ using BLL.DomainModel.Entities;
 using BLL.Repositories;
 using DAL.ORM.Convertions;
 using ORM.Model;
+using ORM.Model.Enums;
 
 namespace DAL.ORM.Repositories
 {
@@ -58,11 +59,12 @@ namespace DAL.ORM.Repositories
                     oldUser.LastName = user.LastName;
                     oldUser.Phone = user.Phone;
                     oldUser.Skype = user.Skype;
-                    oldUser.Avatar = user.Avatar;
+                    oldUser.Avatar = user.Avatar ?? oldUser.Avatar;
                     oldUser.Birthday = user.Birthday;
                     oldUser.Email = user.Email;
-                    //todo: add role for pm and password for user
-
+                    oldUser.Role = (OrmRole) user.Role;
+                    if(!string.IsNullOrEmpty(user.Password))
+                        oldUser.Password = user.Password;
                     context.Entry(oldUser).State = EntityState.Modified;;
                 }
                 else

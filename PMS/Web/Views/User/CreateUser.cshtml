@@ -11,7 +11,7 @@
 </div>
 <fieldset class="createForm">
     <legend>User</legend>
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "css-form", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "js-form", enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -94,7 +94,7 @@
         </p>
         <p>
             @Html.LabelFor(m => m.Avatar)
-            <input id="register-avatar" type="file" name="ProfileImage" />
+            <input id="register-avatar" type="file" name="Avatar" />
 
         </p>
 
@@ -107,4 +107,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/avatar.js"></script>
 }

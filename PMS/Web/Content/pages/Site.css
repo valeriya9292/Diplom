@@ -3,7 +3,7 @@
 }
 
 body {
-    background: #ddd url('images/body.png') repeat scroll top left;
+    background: #ddd url('../../Images/body.png') repeat scroll top left;
     margin: 0;
     padding: 0;
     font-family: Verdana, Geneva, sans-serif;
@@ -37,6 +37,7 @@ th {
 
 td {
     border-bottom: 1px solid #ccc;
+    column-span: none;
 }
 
 code, blockquote {
@@ -488,4 +489,25 @@ tr:nth-child(even) {
 
 tr:nth-child(odd) {
     background: #f5deb3;
+}
+
+.avatar.small {
+    width: 200px;
+    height: 200px;
+}
+.css-user-item {
+    display: inline-block;
+    width: 250px;
+    height: 280px;
+    border: 1px solid;
+    text-align: center;
+}
+.css-center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.disabled {
+    background-color: #ddd
 }

@@ -194,6 +194,7 @@
     <Compile Include="Infrastructure\Captcha.cs" />
     <Compile Include="Infrastructure\RandomUtil.cs" />
     <Compile Include="Models\Convertions\ViewEntityConverter.cs" />
+    <Compile Include="Models\EditUserModel.cs" />
     <Compile Include="Models\CreateUserModel.cs" />
     <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Models\RegisterModel.cs" />
@@ -261,6 +262,9 @@
     <Content Include="Global.asax" />
     <None Include="Scripts\lib\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\body.png" />
+    <Content Include="Images\avatar.png" />
+    <Content Include="Scripts\avatar.js" />
+    <Content Include="Scripts\customKO\ko.bindings.datepicker.js" />
     <Content Include="Scripts\customKO\ko.bindings.tree.js" />
     <Content Include="Scripts\lib\jquery-1.8.2.js" />
     <Content Include="Scripts\lib\jquery-1.8.2.min.js" />
@@ -281,6 +285,8 @@
     <Content Include="Scripts\lib\tree.jquery.js" />
     <Content Include="Scripts\pages\project\dataManager.js" />
     <Content Include="Scripts\pages\project\projectsViewModel.js" />
+    <Content Include="Scripts\pages\user\dataManager.js" />
+    <Content Include="Scripts\pages\user\userViewModel.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

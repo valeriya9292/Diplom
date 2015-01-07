@@ -61,62 +61,58 @@ namespace Web.Controllers
             }
             return View();
         }
-
-        //
-        // GET: /User/Edit/5
-
         public ActionResult Edit(int id)
         {
+            var user = service.FindUserById(id);
+            user.Password = string.Empty;
+            return View(user.ToViewEditUser());
+        }
+
+
+        [HttpPost]
+        public ActionResult Edit(EditUserModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                    var user = model.ToEntityUserFromEdit();
+                    service.SaveUser(user);
+
+                    return RedirectToAction("Index", "User");
+            }
             return View();
         }
 
-        //
-        // POST: /User/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                var user = service.FindUserById(id);
-                user.FirstName = collection["FirstName"];
-                user.LastName = collection["LastName"];
-                user.Email = collection["Email"];
-                user.Skype = collection["Skype"];
-                user.Phone = collection["Phone"];
-                service.SaveUser(user);
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /User/Delete/5
 
         public ActionResult Delete(int id)
         {
-            return View();
+            var user = service.FindUserById(id);
+            return View(user.ToViewUser());
         }
-
-        //
-        // POST: /User/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)
         {
             try
             {
-                // TODO: Add delete logic here
-
+                service.DeleteUser(id);
                 return RedirectToAction("Index");
             }
             catch
             {
                 return View();
             }
+        }
+
+        public ActionResult GetUserImage(int id)
+        {
+            var user = service.FindUserById(id);
+            var avatar = user != null ? user.Avatar : null;
+            if (avatar == null)
+            {
+                var path = Server.MapPath("~/Images/avatar.png");
+                avatar = System.IO.File.ReadAllBytes(path);
+            }
+            return File(avatar, "image/png");
         }
     }
 }
