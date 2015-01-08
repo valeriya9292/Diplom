@@ -11,7 +11,6 @@
             });
             $(element).dialog(options);
         }, 0);
-
         //handle disposal (not strictly necessary in this scenario)
         //ko.utils.domNodeDisposal.addDisposeCallback(element, function () {
         //    $(element).dialog("destroy");

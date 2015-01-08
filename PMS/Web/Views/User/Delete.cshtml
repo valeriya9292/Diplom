@@ -2,9 +2,10 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <div class="css-link">
-    @Html.ActionLink("Back to List", "Index")
+    <a href="#" data-bind="event: { click: closeDelete}">Back</a>
+    @*@Html.ActionLink("Back to List", "Index")*@
 </div>
-<fieldset>
+<fieldset id="deleteForm">
     <legend>User</legend>
     @using (Html.BeginForm())
     {

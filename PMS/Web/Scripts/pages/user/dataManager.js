@@ -9,9 +9,15 @@
         getEditForm: function (data, callback) {
             return $.get(pms.users.dataManager.urls.getEditForm, data, callback);
         },
-        getDeleteForm: function (data, callback) {
-            return $.get(pms.users.dataManager.urls.getDeleteForm, data, callback);
+        getUserJson: function (data, callback) {
+            return $.get(pms.users.dataManager.urls.getUserJson, data, callback);
         },
+        getUsersJson: function (callback) {
+            return $.get(pms.users.dataManager.urls.getUsersJson, callback);
+        },
+        deleteUser: function (data, callback) {
+            $.get(pms.users.dataManager.urls.deleteUser, data, callback);
+        }
     });
 
 })($, ko, pms);

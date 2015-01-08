@@ -10,53 +10,178 @@
     <a href="#" data-bind="event: { click: openCreate}">Create New</a>
 </p>
 
+<!-- ko template: { name: 'ko-user', foreach: users } -->
+<!-- /ko -->
 
-@foreach (var item in Model)
-{
-    <div class="css-user-item">
-
-        <img class="avatar small css-center" src='@Url.Action("GetUserImage", "User", new RouteValueDictionary { { "id", item.Id } })' alt="user image" />
-
-
-        @item.FirstName @item.LastName
-        <br>
-        @item.Role
-
-        <div>
-            <a href="#" data-bind="event: { click: function(){ openEdit({ id:'@item.Id' })}}">Edit</a>
-            <a href="#" data-bind="event: { click: function(){ openDelete({id:'@item.Id'})}}">Delete</a>
-            @*@Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })*@
-            @Html.ActionLink("Details", "Details", new { id = item.Id })
-        </div>
-    </div>
-}
 <div id="createDialog" data-bind="dialog: {autoOpen: false, title: 'Create user' }, dialogVisible: isCreateOpen">
     <div data-bind="html:createContent"></div>
 </div>
 <div id="editDialog" data-bind="dialog: {autoOpen: false, title: 'Edit user' }, dialogVisible: isEditOpen">
     <div data-bind="html:editContent"></div>
 </div>
+
 <div id="deleteDialog" data-bind="dialog: {autoOpen: false, title: 'Delete user' }, dialogVisible: isDeleteOpen">
-    <div data-bind="html:deleteContent"></div>
+    <div data-bind="template: {name: 'ko-deleteForm', data: deleteContent, if:isDeleteOpen}"></div>
 </div>
 
 @section scripts
 {
     <script type="text/javascript">
         var pms = { users: {} };
+        var model;
 
         $(document).ready(function () {
             pms.users.dataManager.urls = {
                 getCreateForm: '@Url.Action("Create", "User")',
                 getEditForm: '@Url.Action("Edit", "User")',
-                getDeleteForm: '@Url.Action("Delete", "User")',
+                getUserJson: '@Url.Action("Get", "User")',
+                deleteUser: '@Url.Action("Delete", "User")',
+                getUsersJson: '@Url.Action("GetAll", "User")'
             };
-
-            var model = new pms.users.usersViewModel();
-            ko.applyBindings(model);
+            var dataManager = new pms.users.dataManager();
+            dataManager.getUsersJson(function (users) {
+                var model = new pms.users.usersViewModel(users);
+                ko.applyBindings(model);
+            });
         });
     </script>
     @Scripts.Render("~/bundles/users")
+
+    <script type="text/html" id="ko-deleteForm">
+        <h3>Are you sure you want to delete this?</h3>
+        <div class="css-link">
+            <a href="#" data-bind="event: { click: function(){$parent.isDeleteOpen(false);}}">Back</a>
+
+        </div>
+        <fieldset id="deleteForm">
+            <legend>User</legend>
+            <form>
+                <p>
+                    <b>First Name:</b>
+                    <span data-bind="text:FirstName"></span>
+                </p>
+                <p>
+                    <b>
+                        Last Name:
+                    </b>
+                    <span data-bind="text:LastName"></span>
+                </p>
+                <p>
+                    <b>
+                        Role:
+                    </b>
+                    <span data-bind="text:Role"></span>
+                </p>
+                <p>
+                    <input type="submit" value="Delete" class="formbutton" data-bind="click: function(){$parent.deleteUser({id: id}); return false;}" />
+                </p>
+            </form>
+        </fieldset>
+
+    </script>
+
+    <script type="text/html" id="ko-user">
+        <div class="css-user-item">
+            <img class="avatar small css-center" data-bind="attr:{ src: '/User/GetUserImage/' + id }" alt="user image" />
+            <span data-bind="text: FirstName +' '+ LastName"></span>
+            <br>
+            <span data-bind="text: Role"></span>
+            <div>
+                <a href="#" data-bind="event: { click: function(){ $parent.openEdit({ id: id })}}">Edit</a>
+                <a href="#" data-bind="event: { click: function(){ $parent.openDelete({id: id})}}">Delete</a>
+                <a data-bind="attr: { href: '/User/Details/'+id }">Details</a>
+            </div>
+        </div>
+
+    </script>
+
+    @*<script type="text/html" id="ko-create-user">
+        <div class="css-link">
+            <a data-bind="event: { click: function(){$parent.isCreateOpen(false);}}">Back</a>
+        </div>
+
+        <fieldset class="createForm">
+            <legend>User</legend>
+            <form enctype="multipart/form-data">
+                <p>
+                    <label for="FirstName">First Name</label>
+                    <input class="text-box single-line" data-val="true" data-val-regex="First name is not correct" data-val-regex-pattern="^[A-Za-z]+$" data-val-required="First Name is required" id="FirstName" name="FirstName" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="FirstName" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <label for="LastName">Last Name</label>
+
+
+                    <input class="text-box single-line" data-val="true" data-val-regex="Last name is not correct" data-val-regex-pattern="^[A-Za-z]+$" data-val-required="Last Name is required" id="LastName" name="LastName" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="LastName" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <label for="Login">Login</label>
+
+
+                    <input class="text-box single-line" data-val="true" data-val-required="Login is required" id="Login" name="Login" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="Login" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <label for="Password">Password</label>
+
+
+                    <input class="text-box single-line password" data-val="true" data-val-length="At least 6 characters" data-val-length-max="100" data-val-length-min="6" data-val-required="Enter password" id="Password" name="Password" type="password" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <label for="ConfirmPassword">Confirm password</label>
+
+
+                    <input class="text-box single-line password" data-val="true" data-val-equalto="Passwords must match" data-val-equalto-other="*.Password" data-val-required="Confirm password" id="ConfirmPassword" name="ConfirmPassword" type="password" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <label for="Email">Email</label>
+
+
+                    <input class="text-box single-line" data-val="true" data-val-regex="Email is not correct" data-val-regex-pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}" id="Email" name="Email" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="Email" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <label for="Birthday">Birthday</label>
+                    <input type="text" id="Birthday" name="Birthday" readonly="readonly">
+                </p>
+                <p>
+                    <label for="Phone">Phone</label>
+
+
+                    <input class="text-box single-line" id="Phone" name="Phone" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="Phone" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <label for="Skype">Skype</label>
+
+
+                    <input class="text-box single-line" id="Skype" name="Skype" type="text" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="Skype" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <label for="Role">Role</label>
+                    <select data-val="true" data-val-required="Требуется поле Role." id="Role" name="Role">
+                        <option>Admin</option>
+                        <option>ProjectManager</option>
+                        <option>User</option>
+                    </select>
+                </p>
+                <p class="lifile">
+
+                    <label for="Avatar">Add Avatar</label>
+                    <input id="Avatar" name="Avatar" type="file" value="" />
+                    <span class="field-validation-valid" data-valmsg-for="Avatar" data-valmsg-replace="true"></span>
+                </p>
+                <p>
+                    <input type="submit" value="Create" class="formbutton" />
+                </p>
+            </form>
+        </fieldset>
+
+    </script>*@
 }
+
 

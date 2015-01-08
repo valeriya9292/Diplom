@@ -2,10 +2,9 @@
 
     var local = pms.users;
 
-    pms.users.usersViewModel = function (options) {
+    pms.users.usersViewModel = function (users) {
         var self = this;
         this._dataManager = new local.dataManager();
-        this.options = options;
 
         this.isCreateOpen = ko.observable(false);
         this.isEditOpen = ko.observable(false);
@@ -13,7 +12,9 @@
 
         this.createContent = ko.observable("");
         this.editContent = ko.observable("");
-        this.deleteContent = ko.observable("");
+        this.deleteContent = ko.observable({ FirstName: "", LastName: "", Role: "" });
+
+        this.users = ko.observableArray(users);
 
         this.openCreate = function () {
             this._dataManager.getCreateForm(function (content) {
@@ -30,11 +31,19 @@
         };
 
         this.openDelete = function (data) {
-            this._dataManager.getDeleteForm(data, function (content) {
-                self.deleteContent(content);
+            this._dataManager.getUserJson(data, function (json) {
+                self.deleteContent(json);
             });
             this.isDeleteOpen(true);
         };
 
+        this.deleteUser = function(id) {
+            this._dataManager.deleteUser(id, function (response) {
+                var item = $.grep(self.users(), function(val) { return val.id == response.id; })[0];
+                self.users.remove(item);
+                self.isDeleteOpen(false);
+
+            });
+        }
     };
 })($, pms);

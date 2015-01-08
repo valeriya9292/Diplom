@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using BLL.Services;
 using Web.Models;
@@ -24,11 +22,10 @@ namespace Web.Controllers
 
         public ActionResult Details(int id)
         {
-            return View();
+            var user = service.FindUserById(id);
+            return View(user);
         }
 
-        //
-        // GET: /User/Create
 
         public ActionResult Create()
         {
@@ -66,16 +63,27 @@ namespace Web.Controllers
             return PartialView(user.ToViewEditUser());
         }
 
+        public ActionResult Get(int id)
+        {
+            var user = service.FindUserById(id);
+            return Json(new { id, user.FirstName, user.LastName, Role = user.Role.ToString() }, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetAll()
+        {
+            var user = service.FindAllUsers();
+            return Json(user.Select(u => new { id = u.Id, u.FirstName, u.LastName, Role = u.Role.ToString() }), JsonRequestBehavior.AllowGet);
+        }
 
         [HttpPost]
         public ActionResult Edit(EditUserModel model)
         {
             if (ModelState.IsValid)
             {
-                    var user = model.ToEntityUserFromEdit();
-                    service.SaveUser(user);
+                var user = model.ToEntityUserFromEdit();
+                service.SaveUser(user);
 
-                    return RedirectToAction("Index", "User");
+                return RedirectToAction("Index", "User");
             }
             return View();
         }
@@ -83,8 +91,17 @@ namespace Web.Controllers
 
         public ActionResult Delete(int id)
         {
+            service.DeleteUser(id);
+            return Json(new { id }, JsonRequestBehavior.AllowGet);
+            //var user = service.FindUserById(id);
+            //return PartialView(user.ToViewUser());
+        }
+        public ActionResult DeleteView(int id)
+        {
+            //service.DeleteUser(id);
+            //return Json(new { id }, JsonRequestBehavior.AllowGet);
             var user = service.FindUserById(id);
-            return PartialView(user.ToViewUser());
+            return PartialView("Delete", user.ToViewUser());
         }
 
         [HttpPost]
