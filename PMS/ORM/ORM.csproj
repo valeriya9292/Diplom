@@ -46,27 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\201501031801024_InitialCreate.cs" />
-    <Compile Include="Migrations\201501031801024_InitialCreate.Designer.cs">
-      <DependentUpon>201501031801024_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501032046385_make fields nullable.cs" />
-    <Compile Include="Migrations\201501032046385_make fields nullable.Designer.cs">
-      <DependentUpon>201501032046385_make fields nullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501032105582_birhthday_nullable.cs" />
-    <Compile Include="Migrations\201501032105582_birhthday_nullable.Designer.cs">
-      <DependentUpon>201501032105582_birhthday_nullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501042031521_revert.cs" />
-    <Compile Include="Migrations\201501042031521_revert.Designer.cs">
-      <DependentUpon>201501042031521_revert.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201501051939174_remove_nullable_from_avatar.cs" />
-    <Compile Include="Migrations\201501051939174_remove_nullable_from_avatar.Designer.cs">
-      <DependentUpon>201501051939174_remove_nullable_from_avatar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Enums\OrmRole.cs" />
     <Compile Include="Model\Enums\OrmTaskStatus.cs" />
     <Compile Include="Model\OrmComment.cs" />
@@ -83,23 +62,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201501031801024_InitialCreate.resx">
-      <DependentUpon>201501031801024_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501032046385_make fields nullable.resx">
-      <DependentUpon>201501032046385_make fields nullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501032105582_birhthday_nullable.resx">
-      <DependentUpon>201501032105582_birhthday_nullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501042031521_revert.resx">
-      <DependentUpon>201501042031521_revert.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201501051939174_remove_nullable_from_avatar.resx">
-      <DependentUpon>201501051939174_remove_nullable_from_avatar.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

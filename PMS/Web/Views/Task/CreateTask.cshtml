@@ -1,0 +1,41 @@
+﻿<script type="text/html" id="ko-createTask">
+    <div class="css-link">
+        <a data-bind="event: { click: function(){isCreateOpen(false);}}">Back</a>
+    </div>
+
+    <fieldset class="createForm">
+        <legend>Task</legend>
+        <label class="error css-project-error" data-bind="text: errorMsg"></label>
+        <form id="createForm" data-bind="submit: submitCreate" class="css-createProject-form">
+            <input type="hidden" id="ProjectId" name="ProjectId" data-bind="value:projectId" />
+            <p>
+                <label for="Name">Name</label>
+                <input id="Name" name="Name" type="text" value="">
+            </p>
+            <p>
+                <label for="StartDate">StartDate</label>
+                <input id="StartDate" name="StartDate" value="">
+            </p>
+            <p>
+                <label for="Duration">Duration</label>
+                <input data-val="true" id="Duration" name="Duration" type="datetime" value="">
+            </p>
+            <p>
+                <label for="Progress">Progress</label>
+                <input id="Progress" name="Progress" type="text" value="">
+            </p>
+            <p>
+                <label for="Description">Description</label>
+                <textarea id="Description" name="Description" cols="50" rows="10"></textarea>
+            </p>
+            <p>
+                <label for="Status">Status</label>
+                <select id="Status" name="Status" data-bind="options: statuses, optionsText: 'statusName', optionsValue: 'statusId'"></select>
+            </p>
+            <p>
+                <input type="submit" value="Create" class="formbutton">
+            </p>
+        </form>
+    </fieldset>
+
+</script>

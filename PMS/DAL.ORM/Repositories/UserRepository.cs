@@ -20,6 +20,14 @@ namespace DAL.ORM.Repositories
             }
         }
 
+        public User FindUserByLogin(string login)
+        {
+            using (var context = new PmsDbContext())
+            {
+                return context.Users.FirstOrDefault(it => it.Login == login).ToEntityUser();
+            }
+        }
+
         public IEnumerable<User> FindAll()
         {
             using (var context = new PmsDbContext())
@@ -32,8 +40,8 @@ namespace DAL.ORM.Repositories
         {
             using (var context = new PmsDbContext())
             {
-                var userIds = context.ProjectMembers.Where(it => it.ProjectId == projectId).Select(it => it.ProjectId);
-                return context.Users.Where(it => userIds.Contains(it.Id)).Select(it => it.ToEntityUser());
+                var userIds = context.ProjectMembers.Where(it => it.ProjectId == projectId).Select(it => it.UserId);
+                return context.Users.AsEnumerable().Where(it => userIds.Contains(it.Id)).Select(it => it.ToEntityUser()).ToList();
             }
         }
 

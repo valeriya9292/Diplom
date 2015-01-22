@@ -1,0 +1,16 @@
+﻿<script type="text/html" id="ko-projectMembers">
+    <div class="css-link">
+        <a data-bind="event: { click: function(){$parent.isPMOpen(false);}}">Back</a>
+    </div>
+    <label class="error css-project-error" data-bind="text: $parent.errorMsg"></label>
+    <form data-bind="submit: $parent.submitPM">
+        <input type="hidden" id="Id" name="Id" data-bind="value:projectId" />
+        <p class="css-pm-select-cont center">
+            <select data-placeholder="Select members..." style="width: 700px;" multiple="true" class="chosen-select" id="PMembSelect" name="PMembSelect" data-bind="options: users, optionsText: 'UserName', optionsValue: 'UserId', selectedOptions: selectedPM"></select>
+        </p>
+        <p>
+            <input type="submit" value="Save" class="formbutton">
+        </p>
+    </form>
+
+</script>

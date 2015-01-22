@@ -35,40 +35,37 @@ function getNameFromPath(strFilepath) {
         return strName[0];
     }
 }
-$(function () {
-    var validClass = "field-validation-valid";
-    var invalidClass = "field-validation-error";
+var initFileValidation = function() {
+    var invalidClass = "error";
     var fileSize = 5;
-    $("#Avatar").change(function () {
+    $("#Avatar").change(function() {
         var file = getNameFromPath($(this).val());
         if (file != null) {
             var extension = file.substr((file.lastIndexOf('.') + 1));
             switch (extension) {
-                case 'jpg':
-                case 'jpeg':
-                case 'png':
-                case 'gif':
-                case 'bmp':
-                    flag = true;
-                    break;
-                default:
-                    flag = false;
+            case 'jpg':
+            case 'jpeg':
+            case 'png':
+            case 'gif':
+            case 'bmp':
+                flag = true;
+                break;
+            default:
+                flag = false;
             }
         }
         if (flag == false) {
-            $(".lifile > span").removeClass(validClass).addClass(invalidClass).text("only jpg, jpeg, png, gif, bmp extension");
+            $(".fileErrorlabel").addClass(invalidClass).text("Only jpg, jpeg, png, gif, bmp extension");
             return false;
-        }
-        else {
+        } else {
             var size = GetFileSize('Avatar');
             if (size > fileSize) {
-                $(".lifile > span").removeClass(validClass).addClass(invalidClass).text("file should be less then 5 MB");
+                $(".fileErrorlabel").addClass(invalidClass).text("File should be less then " + fileSize+" MB");
                 $(".formbutton").attr("disabled", "disabled");
-            }
-            else {
-                $(".lifile > span").removeClass(invalidClass).addClass(validClass).text("");
+            } else {
+                $(".fileErrorlabel").removeClass(invalidClass).text("");
                 $(".formbutton").removeAttr("disabled");
             }
         }
     });
-});
+}

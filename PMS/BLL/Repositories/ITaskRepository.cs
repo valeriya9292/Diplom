@@ -11,6 +11,6 @@ namespace BLL.Repositories
 
         void Delete(int taskId);
 
-        void Save(Task task);
+        int Save(Task task);
     }
 }

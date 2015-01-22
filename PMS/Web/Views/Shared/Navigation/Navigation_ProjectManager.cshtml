@@ -1,7 +1,8 @@
 ﻿<nav>
     <ul>
-        <li class="start">@Html.ActionLink("Home", "Index", "Home")</li>
-        <li class="selected">@Html.ActionLink("About", "About", "Home")</li>
-        <li class="end">@Html.ActionLink("Contact", "Contact", "Home")</li>
+        <li class="start">@Html.ActionLink("Profile", "Profile", "User", new { login = User.Identity.Name }, null)</li>
+        <li>@Html.ActionLink("Projects", "Index", "Project")</li>
+        <li>@Html.ActionLink("Time Logs", "Index", "TimeLog")</li>
+        <li class="end">@Html.ActionLink("Users", "Index", "User")</li>
     </ul>
 </nav>

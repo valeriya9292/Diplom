@@ -25,7 +25,7 @@ namespace DAL.ORM.Repositories
         {
             using (var context = new PmsDbContext())
             {
-                var projectMember = context.ProjectMembers.FirstOrDefault(pm => pm.Id == projectId && pm.UserId == userId);
+                var projectMember = context.ProjectMembers.FirstOrDefault(pm => pm.ProjectId == projectId && pm.UserId == userId);
                 if (projectMember == null)
                     return;
                 context.ProjectMembers.Remove(projectMember);
@@ -45,7 +45,7 @@ namespace DAL.ORM.Repositories
         {
             using (var context = new PmsDbContext())
             {
-                return context.Projects.Select(it => it.ToEntityProject());
+                return context.Projects.AsEnumerable().Select(it => it.ToEntityProject()).ToList();
             }
         }
 
@@ -54,7 +54,15 @@ namespace DAL.ORM.Repositories
             using (var context = new PmsDbContext())
             {
                 var projectIds = context.ProjectMembers.Where(it => it.UserId == userId).Select(it => it.ProjectId);
-                return context.Projects.Where(it => projectIds.Contains(it.Id)).Select(it => it.ToEntityProject());
+                return context.Projects.Where(it => projectIds.Contains(it.Id)).Select(it => it.ToEntityProject()).ToList();
+            }
+        }
+
+        public Project FindByName(string name)
+        {
+            using (var context = new PmsDbContext())
+            {
+                return context.Projects.FirstOrDefault(it => it.Name == name).ToEntityProject();
             }
         }
 

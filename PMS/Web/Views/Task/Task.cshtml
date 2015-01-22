@@ -1,0 +1,31 @@
+﻿<script type="text/html" id="ko-task">
+    <div class="css-task-item">
+        <div class="inline css-task-name-container">
+            <span class="css-task-prop-title"><b>Task</b></span>
+            <br />
+            <span class="css-task-name" data-bind="text:Name"></span>
+        </div>
+        <div class="inline css-task-prop-container">
+            <span class="css-task-prop-title"><b>Start Date</b></span>
+            <br />
+            <span data-bind="text: StartDate"></span>
+        </div>
+        <div class="inline css-task-prop-container">
+            <span class="css-task-prop-title"><b>Progress</b></span>
+            <br />
+            <span data-bind="text: Progress"></span>
+        </div>
+        <div class="inline css-task-prop-container">
+            <span class="css-task-prop-title"><b>Status</b></span>
+            <br />
+            <span data-bind="text: $.grep($parent.statuses, function(r){return r.statusId == Status })[0].statusName"></span>
+        </div>
+        <div class="inline css-task-prop-container">
+            <a style="display:block" href="#" data-bind="event: { click: function(){ $parent.openEdit({ id: Id })}}">Edit</a>
+            <a href="#" data-bind="event: { click: function(){ $parent.openDelete({id: Id})}}">Delete</a>
+        </div>
+        @*<div class="inline">
+            <a href="#" data-bind="event: { click: function(){ $parent.openPM({id: Id})}}">Task<br>Members</a>
+        </div>*@
+    </div>
+</script>

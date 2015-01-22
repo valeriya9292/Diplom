@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="week-picker inline" data-bind="weekpicker: weekpicker, startDateValue: startDate, endDateValue: endDate"></div>
+<br /><br />
+<label>Week :</label> <span id="startDate" data-bind="text:startDate"></span> - <span id="endDate" data-bind="text:endDate"></span>
+
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var pms = { timelogs: { dataManager: {} } };
+
+        $(document).ready(function () {
+            @*pms.timelogs.dataManager.urls = {
+                getTimelogs: '@Url.Action("GetTimelogs", "TimeLog")',
+            };
+
+            var dataManager = new pms.timelogs.dataManager();
+            dataManager.getTimelogs(function (timelogs) {
+                var model = new pms.timelogs.timelogsViewModel({ timelogs: timelogs });
+                ko.applyBindings(model);
+            });*@
+            var model = new pms.timelogs.timelogsViewModel({ });
+            ko.applyBindings(model);
+
+        });
+    </script>
+    @Scripts.Render("~/bundles/timelogs")
+}

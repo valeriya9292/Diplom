@@ -74,17 +74,18 @@ p {
 a {
     color: #FF6633;
 }
+
 div.css-link a {
-    color: #FF6633 ;
+    color: #FF6633;
 }
 
-    a:hover {
-        color: #FF4000;
-    }
+a:hover {
+    color: #FF4000;
+}
 
-    a:focus {
-        outline: none;
-    }
+a:focus {
+    outline: none;
+}
 
 fieldset {
     display: block;
@@ -128,7 +129,7 @@ form p {
     margin-bottom: 7px;
 }
 
-form input.formbutton {
+form input.formbutton, input.formbutton {
     border: none;
     background: #FF6633 none repeat-x scroll left top;
     color: #ffffff;
@@ -474,8 +475,17 @@ footer .footer-bottom {
     overflow: visible;
 }
 
-.field-validation-error {
+label.error, .field-validation-error {
     color: #FF6633;
+    display: inline-block;
+    float: none;
+    margin-left: 10px;
+    width: 240px;
+}
+
+
+.css-project-error.error {
+    width: 300px;
 }
 
 .inline {
@@ -498,6 +508,12 @@ tr:nth-child(odd) {
     width: 200px;
     height: 200px;
 }
+
+.avatar.big {
+    width: 300px;
+    height: 300px;
+}
+
 .css-user-item {
     display: inline-block;
     width: 250px;
@@ -505,6 +521,7 @@ tr:nth-child(odd) {
     border: 1px solid;
     text-align: center;
 }
+
 .css-center {
     margin-left: auto;
     margin-right: auto;
@@ -512,13 +529,88 @@ tr:nth-child(odd) {
 }
 
 .disabled {
-    background-color: #ddd
+    background-color: #ddd;
 }
 
-.ui-dialog {
+.ui-dialog{
     top: 20px !important;
     width: 800px !important;
+    min-height: 500px !important;
 }
+.ui-dialog-content.ui-widget-content {
+    width: 800px !important;
+    height: 500px !important;
+}
+
 .ui-dialog-titlebar-close {
-  visibility: hidden;
+    visibility: hidden;
+}
+
+.css-titleSpan {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.css-user-info {
+    margin-left: 30px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.css-createProject-form input, .css-createProject-form textarea {
+    width: 250px;
+}
+
+.css-createProject-form select {
+    width: 260px;
+}
+
+.css-project-item, .css-task-item {
+    border-bottom: solid 1px gray;
+    padding: 10px 0px;
+}
+
+.css-project-prop-title, .css-task-prop-title {
+    font-size: 11px;
+    color: gray;
+}
+
+.css-project-name-container, .css-task-name-container {
+    width: 18%;
+}
+.css-project-prop-container, .css-task-prop-container {
+    width: 13%;
+}
+.css-project-btn-container {
+     width: 10%;
+}
+
+.css-project-name, .css-task-name {
+    font-size: 20px;
+    padding-left: 10px;
+    text-align: center;
+    color: black;
+}
+
+.validation-summary-errors > ul > li{
+    color: #FF6633 !important;
+}
+
+#pmDialog {
+    height: 600px;
+}
+
+.center
+ {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.css-pm-select-cont {
+    margin-top: 20px;
+}
+.capitalize {
+    text-transform: capitalize;
 }

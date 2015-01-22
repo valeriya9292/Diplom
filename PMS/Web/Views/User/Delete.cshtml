@@ -1,39 +1,32 @@
-﻿@model Web.Models.CreateUserModel
+﻿<script type="text/html" id="ko-deleteForm">
+    <h3>Are you sure you want to delete this?</h3>
+    <div class="css-link">
+        <a href="#" data-bind="event: { click: function(){$parent.isDeleteOpen(false);}}">Back</a>
 
-<h3>Are you sure you want to delete this?</h3>
-<div class="css-link">
-    <a href="#" data-bind="event: { click: closeDelete}">Back</a>
-    @*@Html.ActionLink("Back to List", "Index")*@
-</div>
-<fieldset id="deleteForm">
-    <legend>User</legend>
-    @using (Html.BeginForm())
-    {
-        <p>
-            <b>@Html.DisplayNameFor(model => model.FirstName):</b>
+    </div>
+    <fieldset id="deleteForm">
+        <legend>User</legend>
+        <form>
+            <p>
+                <b>First Name:</b>
+                <span data-bind="text:FirstName"></span>
+            </p>
+            <p>
+                <b>
+                    Last Name:
+                </b>
+                <span data-bind="text:LastName"></span>
+            </p>
+            <p>
+                <b>
+                    Role:
+                </b>
+                <span data-bind="text:Role"></span>
+            </p>
+            <p>
+                <input type="submit" value="Delete" class="formbutton" data-bind="click: function(){$parent.deleteUser({id: Id}); return false;}" />
+            </p>
+        </form>
+    </fieldset>
 
-            @Html.DisplayFor(model => model.FirstName)
-        </p>
-
-        <p>
-            <b>
-                @Html.DisplayNameFor(model => model.LastName):
-            </b>
-            @Html.DisplayFor(model => model.LastName)
-        </p>
-
-        <p>
-            <b>
-                @Html.DisplayNameFor(model => model.Role):
-            </b>
-
-            @Html.DisplayFor(model => model.Role)
-        </p>
-
-
-        @Html.AntiForgeryToken()
-        <p>
-            <input type="submit" value="Delete" class="formbutton" />
-        </p>
-    }
-</fieldset>
+</script>

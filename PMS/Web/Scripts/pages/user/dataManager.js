@@ -1,13 +1,20 @@
 ﻿(function ($, ko, pms) {
     pms.users = pms.users || {};
-    pms.users.dataManager = function () {};
+    pms.users.dataManager = function () { };
 
     $.extend(pms.users.dataManager.prototype, {
-        getCreateForm: function (callback) {
-            return $.get(pms.users.dataManager.urls.getCreateForm, callback);
-        },
-        getEditForm: function (data, callback) {
-            return $.get(pms.users.dataManager.urls.getEditForm, data, callback);
+        createUser: function (data, callback) {
+            return $.ajax({
+                url: pms.users.dataManager.urls.createUser,
+                type: 'POST',
+                data: data,
+                async: false,
+                success: callback,
+                error: callback,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
         },
         getUserJson: function (data, callback) {
             return $.get(pms.users.dataManager.urls.getUserJson, data, callback);
@@ -17,7 +24,20 @@
         },
         deleteUser: function (data, callback) {
             $.get(pms.users.dataManager.urls.deleteUser, data, callback);
-        }
+        },
+        editUser: function (data, callback) {
+            return $.ajax({
+                url: pms.users.dataManager.urls.editUser,
+                type: 'POST',
+                data: data,
+                async: false,
+                success: callback,
+                error: callback,
+                cache: false,
+                contentType: false,
+                processData: false
+            });
+        },
     });
 
 })($, ko, pms);

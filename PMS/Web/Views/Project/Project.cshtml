@@ -1,0 +1,37 @@
+﻿<script type="text/html" id="ko-project">
+    <div class="css-project-item">
+        <div class="inline css-project-name-container">
+            <span class="css-project-prop-title"><b>Project</b></span>
+            <br />
+            <span class="css-project-name" data-bind="text:Name"></span>
+        </div>
+        <div class="inline css-project-prop-container">
+            <span class="css-project-prop-title"><b>Start Date</b></span>
+            <br />
+            <span data-bind="text: StartDate"></span>
+        </div>
+        <div class="inline css-project-prop-container">
+            <span class="css-project-prop-title"><b>Progress</b></span>
+            <br />
+            <span data-bind="text: Progress"></span>
+        </div>
+        <div class="inline css-project-prop-container">
+            <span class="css-project-prop-title"><b>Status</b></span>
+            <br />
+            <span data-bind="text:  $.grep($parent.statuses, function(r){return r.statusId == Status })[0].statusName"></span>
+        </div>
+        <div class="inline css-project-btn-container">
+            <a style="display:block" href="#" data-bind="event: { click: function(){ $parent.openEdit({ id: Id })}}">Edit</a>
+            <a href="#" data-bind="event: { click: function(){ $parent.openDelete({id: Id})}}">Delete</a>
+        </div>
+        <div class="inline css-project-btn-container">
+            <a href="#" data-bind="event: { click: function(){ $parent.openPM({id: Id})}}">Project<br>Members</a>
+        </div>
+        <div class="inline css-project-btn-container">
+            <a data-bind="attr: { href: '/Task/Index/'+Id }">Tasks</a>
+        </div>
+        <div class="inline">
+            <a data-bind="attr: { href: '/Project/GanttIndex/'+Id }">Gantt</a>
+        </div>
+    </div>
+</script>

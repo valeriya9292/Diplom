@@ -7,7 +7,7 @@ namespace BLL.DomainModel.Entities
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public DateTime? Duration { get; set; }
+        public decimal Duration { get; set; }
         public string Name { get; set; }
         public decimal Progress { get; set; }
         public DateTime? StartDate { get; set; }

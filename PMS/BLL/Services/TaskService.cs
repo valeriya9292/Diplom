@@ -10,32 +10,32 @@ namespace BLL.Services
 
         public TaskService(ITaskRepository repository)
         {
-            repository = repository;
+            this.repository = repository;
         }
 
-        Task FindTaskById(int id)
+        public Task FindTaskById(int id)
         {
             return repository.FindById(id);
         }
 
-        IEnumerable<Task> FindAllTasks()
+        public IEnumerable<Task> FindAllTasks()
         {
             return repository.FindAll();
         }
 
-        IEnumerable<Task> FindTasksByProjectId(int projectId)
+        public IEnumerable<Task> FindTasksByProjectId(int projectId)
         {
             return repository.FindByProjectId(projectId);
         }
 
-        void DeleteTask(int taskId)
+        public void DeleteTask(int taskId)
         {
             repository.Delete(taskId);
         }
 
-        void SaveTask(Task task)
+        public int SaveTask(Task task)
         {
-            repository.Save(task);
+            return repository.Save(task);
         }
 
     }

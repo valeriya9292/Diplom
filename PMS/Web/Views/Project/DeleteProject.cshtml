@@ -1,0 +1,32 @@
+﻿<script type="text/html" id="ko-deleteForm">
+    <h3>Are you sure you want to delete this?</h3>
+    <div class="css-link">
+        <a href="#" data-bind="event: { click: function(){$parent.isDeleteOpen(false);}}">Back</a>
+
+    </div>
+    <fieldset id="deleteForm">
+        <legend>Project</legend>
+        <form>
+            <p>
+                <b>Name:</b>
+                <span data-bind="text:Name"></span>
+            </p>
+            <p>
+                <b>
+                    Start date:
+                </b>
+                <span data-bind="text:StartDate"></span>
+            </p>
+            <p>
+                <b>
+                    Status:
+                </b>
+                <span data-bind="text:$.grep($parent.statuses, function(r){return r.statusId == Status })[0].statusName"></span>
+            </p>
+            <p>
+                <input type="submit" value="Delete" class="formbutton" data-bind="click: function(){$parent.deleteProject({id: Id}); return false;}" />
+            </p>
+        </form>
+    </fieldset>
+
+</script>

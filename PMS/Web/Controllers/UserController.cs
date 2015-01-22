@@ -3,10 +3,11 @@ using System.Web.Mvc;
 using BLL.Services;
 using Web.Models;
 using Web.Models.Convertions;
+using Web.Models.DTO;
 
 namespace Web.Controllers
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         private readonly UserService service;
         public UserController(UserService service)
@@ -16,8 +17,7 @@ namespace Web.Controllers
 
         public ActionResult Index()
         {
-            var users = service.FindAllUsers();
-            return View(users);
+            return View();
         }
 
         public ActionResult Details(int id)
@@ -26,82 +26,68 @@ namespace Web.Controllers
             return View(user);
         }
 
-
-        public ActionResult Create()
+        public ActionResult Profile(string login)
         {
-            return PartialView("CreateUser");
+
+            var user = service.FindUserByLogin(login);
+            return View("Details", user);
         }
+
         [HttpPost]
         public ActionResult Create(CreateUserModel model)
         {
-            if (ModelState.IsValid)
+            var anyUser = service.FindAllUsers().Any(u => u.Login.Contains(model.Login));
+            if (anyUser)
+                return Json(new { error = "Login is used by another user" }, JsonRequestBehavior.AllowGet);
+            try
             {
-                var anyUser = service.FindAllUsers().Any(u => u.Login.Contains(model.Login));
-                if (anyUser)
-                {
-                    ModelState.AddModelError("Login", "User already exists");
-                    return View("CreateUser", model);
-                }
-                try
-                {
-                    var user = model.ToEntityUser();
-                    service.SaveUser(user);
-
-                    return RedirectToAction("Index", "User");
-                }
-                catch
-                {
-                    return PartialView("CreateUser");
-                }
+                service.SaveUser(model.ToEntityUser());
+                var user = service.FindUserByLogin(model.Login);
+                return Json(new UserDto(user), JsonRequestBehavior.AllowGet);
             }
-            return PartialView("CreateUser");
+            catch
+            {
+                return Json(new { error = "Sorry! User was not saved =(" }, JsonRequestBehavior.AllowGet);
+            }
         }
-        public ActionResult Edit(int id)
-        {
-            var user = service.FindUserById(id);
-            user.Password = string.Empty;
-            return PartialView(user.ToViewEditUser());
-        }
+        //public ActionResult EditGet(int id)
+        //{
+        //    var user = service.FindUserById(id);
+        //    user.Password = string.Empty;
+        //     return Json(user, JsonRequestBehavior.AllowGet);
+        //}
 
         public ActionResult Get(int id)
         {
             var user = service.FindUserById(id);
-            return Json(new { id, user.FirstName, user.LastName, Role = user.Role.ToString() }, JsonRequestBehavior.AllowGet);
+
+            return Json(new UserDto(user), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetAll()
         {
-            var user = service.FindAllUsers();
-            return Json(user.Select(u => new { id = u.Id, u.FirstName, u.LastName, Role = u.Role.ToString() }), JsonRequestBehavior.AllowGet);
+            var users = service.FindAllUsers();
+            return Json(users.Select(u => new UserDto(u)), JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
         public ActionResult Edit(EditUserModel model)
         {
-            if (ModelState.IsValid)
+            try
             {
-                var user = model.ToEntityUserFromEdit();
-                service.SaveUser(user);
-
-                return RedirectToAction("Index", "User");
+                service.SaveUser(model.ToEntityUserFromEdit());
+                var user = service.FindUserById(model.Id);
+                return Json(new UserDto(user), JsonRequestBehavior.AllowGet);
             }
-            return View();
+            catch
+            {
+                return Json(new {error = "Sorry! User was not edited =("}, JsonRequestBehavior.AllowGet);
+            }
         }
-
 
         public ActionResult Delete(int id)
         {
             service.DeleteUser(id);
             return Json(new { id }, JsonRequestBehavior.AllowGet);
-            //var user = service.FindUserById(id);
-            //return PartialView(user.ToViewUser());
-        }
-        public ActionResult DeleteView(int id)
-        {
-            //service.DeleteUser(id);
-            //return Json(new { id }, JsonRequestBehavior.AllowGet);
-            var user = service.FindUserById(id);
-            return PartialView("Delete", user.ToViewUser());
         }
 
         [HttpPost]
@@ -118,7 +104,7 @@ namespace Web.Controllers
             }
         }
 
-        public ActionResult GetUserImage(int id)
+        public ActionResult GetUserImage(int id, decimal? flag)
         {
             var user = service.FindUserById(id);
             var avatar = user != null ? user.Avatar : null;

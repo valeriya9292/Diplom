@@ -2,26 +2,63 @@
     ViewBag.Title = "Index";
 }
 
-<input type="button" class="css-button" value="Create New Project" />
-<div data-bind="tree: projects"></div>
+<p>
+    <a href="#" data-bind="event: { click: openCreate}">Create New</a>
+</p>
+
+<!-- ko template: { name: 'ko-project', foreach: projects } -->
+<!-- /ko -->
+@*<div data-bind="tree: projects"></div>*@
+
+<div id="createDialog" data-bind="dialog: {autoOpen: false, title: 'Create project' }, dialogVisible: isCreateOpen">
+    <div data-bind="template: {name: 'ko-createProject', if:isCreateOpen}"></div>
+</div>
+<div id="deleteDialog" data-bind="dialog: {autoOpen: false, title: 'Delete project' }, dialogVisible: isDeleteOpen">
+    <div data-bind="template: {name: 'ko-deleteForm', data: deleteContent, if:isDeleteOpen}"></div>
+</div>
+<div id="editDialog" data-bind="dialog: {autoOpen: false, title: 'Edit project' }, dialogVisible: isEditOpen">
+    <div data-bind="template: {name: 'ko-editProject',  data: editContent, if: isEditOpen}"></div>
+</div>
+<div id="pmDialog" data-bind="dialog: {autoOpen: false, title: 'Select project members' }, dialogVisible: isPMOpen">
+    <div data-bind="template: {name: 'ko-projectMembers',  data: projectMembers, if: isPMOpen}"></div>
+</div>
+
+@{
+    Html.RenderPartial("CreateProject");
+    Html.RenderPartial("EditProject");
+    Html.RenderPartial("DeleteProject");
+    Html.RenderPartial("Project");
+    Html.RenderPartial("ProjectMembers");
+}
 
 @section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         var pms = { projects: { dataManager: {} } };
 
         $(document).ready(function () {
             pms.projects.dataManager.urls = {
                 getProjects: '@Url.Action("GetProjects", "Project")',
-            };
+                createProject: '@Url.Action("Create", "Project")',
+                getProjectJson: '@Url.Action("Get", "Project")',
+                deleteProject: '@Url.Action("Delete", "Project")',
+                editProject: '@Url.Action("Edit", "Project")',
+                getProjectMembers: '@Url.Action("GetProjectMembers", "Project")',
+                saveProjectMembers: '@Url.Action("SaveProjectMembers", "Project")',
+        };
 
             var dataManager = new pms.projects.dataManager();
             dataManager.getProjects(function (projectsJson) {
                 var model = new pms.projects.projectsViewModel({ projects: projectsJson });
                 ko.applyBindings(model);
             });
+
         });
     </script>
     <script src="@Url.Content("~/Scripts/lib/tree.jquery.js")"></script>
+    <script src="@Url.Content("~/Scripts/lib/chosen.jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/lib/prism.js")"></script>
     <script src="@Url.Content("~/Scripts/lib/jquery.cookie.js")"></script>
-    @Scripts.Render("~/bundles/projects")
+    @Scripts.Render("~/bundles/projects") 
 }
+

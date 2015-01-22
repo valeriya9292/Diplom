@@ -1,78 +1,76 @@
 ﻿@model BLL.DomainModel.Entities.User
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Profile";
 }
 
 <h2>Details</h2>
-
-<fieldset>
-    <legend>User</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.FirstName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.FirstName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.LastName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.LastName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Birthday)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Birthday)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Phone)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Phone)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Skype)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Skype)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Email)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Email)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Login)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Login)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Password)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Password)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CreationDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CreationDate)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) |
+<div class="css-link">
     @Html.ActionLink("Back to List", "Index")
-</p>
+</div>
+<div class="inline">
+    <img class="avatar big css-center" data-bind="attr:{ src: '/User/GetUserImage?id=' + user().Id+'&flag='+ flag()}" alt="user image" />
+</div>
+<div class="inline css-user-info">
+    <input type="hidden" name="Id" data-bind="text:user().Id" />
+    <p>
+        <span class="css-titleSpan" data-bind="text: user().FirstName +' '+ user().LastName"></span>
+        
+    </p>
+    <p>
+        <a href="#" data-bind="event: { click: function(){ openEdit({ id: user().Id })}}">Edit</a>
+    </p>
+    <p>
+        <label class="bold" for="Login">Login:</label>
+        <span id="Login" data-bind="text:user().Login"></span>
+    </p>
+    <p>
+        <label class="bold" for="Email">Email:</label>
+        <span id="Email" data-bind="text:user().Email"></span>
+    </p>
+    <p>
+        <label class="bold" for="Birthday">Birthday:</label>
+        <span data-bind="text:user().Birthday"></span>
+    </p>
+    <p>
+        <label class="bold" for="Phone">Phone:</label>
+        <span id="Phone" data-bind="text:user().Phone"></span>
+    </p>
+    <p>
+        <label class="bold" for="Skype">Skype:</label>
+        <span id="Skype" data-bind="text:user().Skype"></span>
+    </p>
+    <p>
+        <label class="bold" for="Role">Role:</label>
+        <span data-bind="text: $.grep(roles, function(r){return r.roleId == user().Role })[0].roleName"></span>
+</div>
+<div id="editDialog" data-bind="dialog: {autoOpen: false, title: 'Edit user' }, dialogVisible: isEditOpen">
+    <div data-bind="template: {name: 'ko-editUser',  data: editContent, if: isEditOpen}"></div>
+</div>
+@{
+    Html.RenderPartial("Edit");
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src='@Url.Content("~/Scripts/fileValidation.js")'></script>
+    <script type="text/javascript">
+
+    var pms = { users: {} };
+    var model;
+
+    $(document).ready(function () {
+        pms.users.dataManager.urls = {
+            getUserJson: '@Url.Action("Get", "User")',
+            editUser: '@Url.Action("Edit", "User")',
+            };
+            var dataManager = new pms.users.dataManager();
+            dataManager.getUserJson({ id: @Model.Id }, function (user) {
+                var model = new pms.users.usersViewModel([user]);
+                ko.applyBindings(model);
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/users")
+
+}

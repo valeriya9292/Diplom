@@ -1,0 +1,18 @@
+﻿div.gantt_scale_cell 
+{
+    width: 45px !important;
+}
+.gantt_grid_head_cell.gantt_grid_head_start_date 
+{
+     width: 70px !important;
+}
+.gantt_grid_head_cell.gantt_grid_head_duration  
+{
+     width: 50px !important;
+}
+.gantt_grid_head_cell.gantt_grid_head_add.gantt_last_cell {
+     width: 25px !important;
+}
+#gantt_here {
+    height: 400px !important;  
+}

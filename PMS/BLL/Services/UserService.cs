@@ -17,9 +17,14 @@ namespace BLL.Services
             return repository.FindById(userId);
         }
 
-        IEnumerable<User> FindUsersByProjectId(int projectId)
+        public IEnumerable<User> FindUsersByProjectId(int projectId)
         {
             return repository.FindByProjectId(projectId);
+        }
+
+        public User FindUserByLogin(string login)
+        {
+            return repository.FindUserByLogin(login);
         }
         public IEnumerable<User> FindAllUsers()
         {

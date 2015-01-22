@@ -11,6 +11,7 @@ namespace BLL.Repositories
         Project FindById(int id);
         IEnumerable<Project> FindAll();
         IEnumerable<Project> FindByUserId(int userId);
+        Project FindByName(string name);
 
         void Delete(int projectId);
 

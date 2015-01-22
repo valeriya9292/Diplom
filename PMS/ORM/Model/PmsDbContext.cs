@@ -4,7 +4,7 @@ namespace ORM.Model
 {
     public class PmsDbContext : DbContext
     {
-        public PmsDbContext() : base("PmsDb") { }
+        public PmsDbContext() : base("database") { }
 
         public DbSet<OrmProject> Projects { get; set; }
         public DbSet<OrmUser> Users { get; set; }

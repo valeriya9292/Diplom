@@ -1,0 +1,14 @@
+﻿<script type="text/html" id="ko-user">
+    <div class="css-user-item">
+        <img class="avatar small css-center" data-bind="attr:{ src: '/User/GetUserImage?id=' + Id +'&flag='+ $parent.flag() }" alt="user image" />
+        <span data-bind="text: FirstName +' '+ LastName"></span>
+        <br>
+        <span data-bind="text: $.grep($parent.roles, function(r){return r.roleId == Role })[0].roleName"></span>
+        <div>
+            <a href="#" data-bind="event: { click: function(){ $parent.openEdit({ id: Id })}}">Edit</a>
+            <a href="#" data-bind="event: { click: function(){ $parent.openDelete({id: Id})}}">Delete</a>
+            <a data-bind="attr: { href: '/User/Details/'+Id }">Details</a>
+        </div>
+    </div>
+
+</script>

@@ -24,7 +24,7 @@ namespace DAL.ORM.Repositories
         {
             using (var context = new PmsDbContext())
             {
-                return context.Tasks.Select(it => it.ToEntityTask());
+                return context.Tasks.AsEnumerable().Select(it => it.ToEntityTask()).ToList();
             }
         }
 
@@ -32,7 +32,7 @@ namespace DAL.ORM.Repositories
         {
             using (var context = new PmsDbContext())
             {
-                return context.Tasks.Where(t => t.Id == projectId).Select(it => it.ToEntityTask());
+                return context.Tasks.AsEnumerable().Where(t => t.ProjectId == projectId).Select(it => it.ToEntityTask()).ToList();
             }
         }
 
@@ -47,13 +47,15 @@ namespace DAL.ORM.Repositories
             }
         }
 
-        public void Save(Task task)
+        public int Save(Task task)
         {
+            OrmTask savedTask;
             using (var context = new PmsDbContext())
             {
                 var oldTask = context.Tasks.FirstOrDefault(u => u.Id == task.Id);
                 if (oldTask != null)
                 {
+                    savedTask = oldTask;
                     oldTask.Description = task.Description;
                     oldTask.Duration = task.Duration;
                     oldTask.Name = task.Name;
@@ -66,10 +68,11 @@ namespace DAL.ORM.Repositories
                 }
                 else
                 {
-                    context.Tasks.Add(task.ToOrmTask());
+                    savedTask = context.Tasks.Add(task.ToOrmTask());
                 }
                 context.SaveChanges();
             }
+            return savedTask.Id;
         }
     }
 }

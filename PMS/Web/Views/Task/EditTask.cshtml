@@ -1,0 +1,41 @@
+﻿<script type="text/html" id="ko-editTask">
+    <div class="css-link">
+        <a data-bind="event: { click: function(){$parent.isEditOpen(false);}}">Back</a>
+    </div>
+
+    <fieldset class="createForm">
+        <legend>Task</legend>
+        <label class="error css-project-error" data-bind="text: $parent.errorMsg"></label>
+        <form id="createForm" data-bind="submit: $parent.submitEdit" class="css-createProject-form">
+            <input type="hidden" name="Id" data-bind="value:Id" />
+            <p>
+                <label for="Name">Name</label>
+                <input id="Name" name="Name" type="text" data-bind="value:Name">
+            </p>
+            <p>
+                <label for="StartDate">StartDate</label>
+                <input id="StartDate" name="StartDate" type="datetime" data-bind="value:StartDate">
+            </p>
+            <p>
+                <label for="Duration">Duration</label>
+                <input data-val="true" id="Duration" name="Duration" data-bind="value:Duration">
+            </p>
+            <p>
+                <label for="Progress">Progress</label>
+                <input id="Progress" name="Progress" type="text" data-bind="value:Progress">
+            </p>
+            <p>
+                <label for="Description">Description</label>
+                <textarea id="Description" name="Description" cols="50" rows="10" data-bind="value:Description"></textarea>
+            </p>
+            <p>
+                <label for="Status">Status</label>
+                <select id="Status" name="Status" data-bind="options: $parent.statuses, optionsText: 'statusName', optionsValue: 'statusId', value: Status"></select>
+            </p>
+            <p>
+                <input type="submit" value="Save" class="formbutton">
+            </p>
+        </form>
+    </fieldset>
+
+</script>

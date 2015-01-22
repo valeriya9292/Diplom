@@ -49,6 +49,13 @@ namespace Web
             bundles.Add(new ScriptBundle("~/bundles/users").Include(
                 "~/Scripts/pages/user/dataManager.js",
                 "~/Scripts/pages/user/*.js"));
+
+            bundles.Add(new StyleBundle("~/Content/lib/css").Include(
+                "~/Content/lib/*.css"));
+            bundles.Add(new ScriptBundle("~/bundles/tasks").Include(
+                     "~/Scripts/pages/task/*.js"));
+            bundles.Add(new ScriptBundle("~/bundles/timelogs").Include(
+                     "~/Scripts/pages/timelog/*.js"));
         }
     }
 }

@@ -8,7 +8,7 @@ using Web.Providers;
 namespace Web.Controllers
 {
     [AllowAnonymous]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private readonly UserService service;
         public AccountController(UserService service)
@@ -24,7 +24,7 @@ namespace Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LogInModel viewModel, string returnUrl)
         {
-            //((CustomMembershipProvider)Membership.Provider).CreateUser("admin@email.com", "1234567", Role.Admin);
+            // ((CustomMembershipProvider)Membership.Provider).CreateUser("admin@email.com", "1234567", Role.Admin);
             if (ModelState.IsValid)
             {
                 var provider = (CustomMembershipProvider)Membership.Provider;
@@ -36,13 +36,14 @@ namespace Web.Controllers
                         return Redirect(returnUrl);
                     }
                     var roleProvider = new CustomRoleProvider();
-                    return roleProvider.IsUserInRole(viewModel.Login, Role.User) ? RedirectToAction("Contact", "Home") 
-                        : RedirectToAction("About", "Home");
+                    return (roleProvider.IsUserInRole(viewModel.Login, Role.ProjectManager) || roleProvider.IsUserInRole(viewModel.Login, Role.Admin)) ?
+                            RedirectToAction("Index", "Project")
+                        : RedirectToAction("Details", "User");
                 }
-                ModelState.AddModelError("", "Incorrect email or password");
+                ModelState.AddModelError("", "Incorrect login or password");
             }
 
-          
+
             return View(viewModel);
         }
 

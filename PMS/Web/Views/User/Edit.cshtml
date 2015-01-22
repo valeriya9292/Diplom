@@ -1,124 +1,75 @@
 ﻿@using BLL.DomainModel.Enums
-@model Web.Models.EditUserModel
+<script type="text/html" id="ko-editUser">
+    <div class="css-link">
+        <a data-bind="event: { click: function(){$parent.isEditOpen(false);}}">Back</a>
+    </div>
 
-@Scripts.Render("~/bundles/jquery")
-@Scripts.Render("~/bundles/jqueryui")
-@Scripts.Render("~/bundles/ko")
-@Scripts.Render("~/bundles/jqueryval")
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#Birthday").datepicker();
-    });
+    <fieldset class="createForm">
+        <legend>User</legend>
+        <label class="error" data-bind="text: $parent.errorMsg"></label>
+        <form enctype="multipart/form-data" id="createForm" data-bind="submit: $parent.submitEdit">
+            <input type="hidden" name="Id" data-bind="value:Id" />
+            <p>
+                <label for="FirstName">First Name</label>
+                <input id="FirstName" name="FirstName" type="text" data-bind="value:FirstName" />
+            </p>
+            <p>
+                <label for="LastName">Last Name</label>
+                <input name="LastName" type="text" data-bind="value:LastName" />
+            </p>
+            <p>
+                <label for="Login">Login</label>
+                <input id="Login" name="Login" type="text" data-bind="value:Login" readonly="readonly" class="disabled" disabled="disabled" />
+                <input type="hidden" id="Login" name="Login" data-bind="value:Login" />
+            </p>
+            <p>
+                <label for="Password">Password</label>
+                <input id="Password" name="Password" type="password" data-bind="value:Password" />
+            </p>
+            <p>
+                <label for="ConfirmPassword">Confirm password</label>
+                <input id="ConfirmPassword" name="ConfirmPassword" type="password" data-bind="value:ConfirmPassword" />
+            </p>
+            <p>
+                <label for="Email">Email</label>
+                <input id="Email" name="Email" type="text" data-bind="value:Email" />
+            </p>
+            <p>
+                <label for="Birthday">Birthday</label>
+                <input type="text" id="Birthday" name="Birthday" readonly="readonly" data-bind="value:Birthday">
+            </p>
+            <p>
+                <label for="Phone">Phone</label>
+                <input id="Phone" name="Phone" type="text" data-bind="value:Phone" />
+            </p>
+            <p>
+                <label for="Skype">Skype</label>
+                <input id="Skype" name="Skype" type="text" data-bind="value:Skype" />
+            </p>
+            <p>
+                <label for="Role">Role</label>
+                @{
+                    Role role;
+                    Enum.TryParse(Roles.GetRolesForUser(User.Identity.Name).FirstOrDefault(), out role);
+                    if (role == Role.Admin || role == Role.ProjectManager)
+                    {
+                        <select id="Role" name="Role" data-bind="options: $parent.roles, optionsText: 'roleName', optionsValue: 'roleId', value: Role"></select>
+                    }
+                    else
+                    {
+                        <input type="text" data-bind="value: Role" name="Role" readonly="readonly" class="disabled">
+                    }
+                }
+
+            <p>
+
+                <label for="Avatar">Add Avatar</label>
+                <input id="Avatar" name="Avatar" type="file" value="" />
+                <label class="fileErrorlabel"></label>
+            </p>
+            <p>
+                <input type="submit" value="Save" class="formbutton" />
+            </p>
+        </form>
+    </fieldset>
 </script>
-<script src='@Url.Content("~/Scripts/fileValidation.js")'></script>
-
-<div class="css-link">
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-<fieldset class="createForm">
-    <legend>User</legend>
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "js-form", enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken()
-        @Html.ValidationSummary(true)
-
-        <p>
-            @Html.LabelFor(model => model.FirstName)
-
-
-            @Html.EditorFor(model => model.FirstName)
-            @Html.ValidationMessageFor(model => model.FirstName)
-        </p>
-
-        <p>
-            @Html.LabelFor(model => model.LastName)
-
-
-            @Html.EditorFor(model => model.LastName)
-            @Html.ValidationMessageFor(model => model.LastName)
-        </p>
-
-        <p>
-            @Html.LabelFor(model => model.Login)
-            <input type="text" value="@Model.Login" readonly="readonly" class="disabled" disabled="disabled" />
-            <input type="hidden" value="@Model.Login" name="Login">
-        </p>
-
-        <p>
-            @Html.LabelFor(model => model.Password)
-            @Html.EditorFor(model => model.Password)
-            @Html.ValidationMessageFor(model => model.Password)
-        </p>
-
-        <p>
-            @Html.LabelFor(model => model.ConfirmPassword)
-
-
-            @Html.EditorFor(model => model.ConfirmPassword)
-            @Html.ValidationMessageFor(model => model.ConfirmPassword)
-        </p>
-
-        <p>
-            @Html.LabelFor(model => model.Email)
-
-
-            @Html.EditorFor(model => model.Email)
-            @Html.ValidationMessageFor(model => model.Email)
-        </p>
-
-        <p>
-            @Html.LabelFor(model => model.Birthday)
-            @{
-                var date = Model.Birthday.HasValue ? Model.Birthday.Value.ToString(" mm/dd/yyyy") : string.Empty;
-            }
-            <input type="text" id="Birthday" name="Birthday" readonly="readonly" value="@date" />
-        </p>
-
-        <p>
-            @Html.LabelFor(model => model.Phone)
-
-
-            @Html.EditorFor(model => model.Phone)
-            @Html.ValidationMessageFor(model => model.Phone)
-        </p>
-
-        <p>
-            @Html.LabelFor(model => model.Skype)
-
-
-            @Html.EditorFor(model => model.Skype)
-            @Html.ValidationMessageFor(model => model.Skype)
-        </p>
-
-        <p>
-            @Html.LabelFor(m => m.Role)
-            @{
-                Role role;
-                Enum.TryParse(Roles.GetRolesForUser(User.Identity.Name).FirstOrDefault(), out role);
-                if (role == Role.Admin || role == Role.ProjectManager)
-                {
-
-                    @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(Role))))
-                }
-                else
-                {
-                    @Html.DropDownListFor(m => m.Role, new SelectList(Enum.GetValues(typeof(Role))), new { @readonly = "readonly", disabled = "disabled", @class = "disabled" })
-                    <input type="hidden" value="@Model.Role" name="Role">
-                }
-            }
-
-        </p>
-        <p class="lifile">
-
-            @Html.LabelFor(m => m.Avatar)
-            @Html.TextBoxFor(m => m.Avatar, new { type = "file" })
-            @Html.ValidationMessageFor(m => m.Avatar)
-        </p>
-
-        <p>
-            <input type="submit" value="Save" class="formbutton" />
-        </p>
-
-    }
-</fieldset>
