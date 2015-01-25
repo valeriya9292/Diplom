@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using BLL.DomainModel.Entities;
 using BLL.Services;
@@ -24,8 +21,6 @@ namespace Web.Controllers
             this.service = service;
             this.userService = userService;
         }
-        //
-        // GET: /TimeLog/Details/5
 
         public ActionResult GetTimelogs()
         {
@@ -35,11 +30,6 @@ namespace Web.Controllers
             return Json(new { timelogs }, JsonRequestBehavior.AllowGet);
         }
 
-        //
-        // GET: /TimeLog/Create
-
-
-        [HttpPost]
         public ActionResult Create(TimeLog timelog, DateTime startDate)
         {
             try
@@ -59,18 +49,11 @@ namespace Web.Controllers
             }
         }
 
-        //
-        // GET: /TimeLog/Edit/5
-
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        //
-        // POST: /TimeLog/Edit/5
-
-        [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
             try
@@ -84,31 +67,10 @@ namespace Web.Controllers
                 return View();
             }
         }
-
-        //
-        // GET: /TimeLog/Delete/5
-
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        //
-        // POST: /TimeLog/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            service.DeleteTimeLog(id);
+            return Json(new { id }, JsonRequestBehavior.AllowGet);
         }
 
         private static int WeekOfYearISO8601(DateTime date)

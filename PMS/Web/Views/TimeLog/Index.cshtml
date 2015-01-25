@@ -8,7 +8,6 @@
     </p>
     <div class="week-picker" data-bind="weekpicker: weekpicker, startDateValue: startDate, endDateValue: endDate, visible:isWeekPickerVisible"></div>
 </div>
-
 <p>
     <a href="#" data-bind="event: { click: openCreate}">Add New</a>
 </p>
@@ -23,103 +22,33 @@
     <!-- /ko -->
 </div>
 
+<div id="deleteDialog" data-bind="dialog: {autoOpen: false, title: 'Delete timelog' }, dialogVisible: isDeleteOpen">
+    <div data-bind="template: {name: 'ko-deleteForm', data: deleteContent, if:isDeleteOpen}"></div>
+</div>
+@{
+    Html.RenderPartial("CreateTimelog");
+    Html.RenderPartial("Delete");
+    Html.RenderPartial("Timelog");
+}
+
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
     <script type="text/javascript">
         var pms = { timelogs: { dataManager: {} } };
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             pms.timelogs.dataManager.urls = {
                 getTimelogs: '@Url.Action("GetTimelogs", "TimeLog")',
-                createTimelog: '@Url.Action("Create", "TimeLog")'
+                createTimelog: '@Url.Action("Create", "TimeLog")',
+                deleteTimelog: '@Url.Action("Delete", "TimeLog")',
             };
 
             var dataManager = new pms.timelogs.dataManager();
-            dataManager.getTimelogs(function(timelogs) {
+            dataManager.getTimelogs(function (timelogs) {
                 var model = new pms.timelogs.timelogsViewModel(timelogs);
                 ko.applyBindings(model);
             });
         });
     </script>
     @Scripts.Render("~/bundles/timelogs")
-    <script type="text/html" id='ko-timelogs'>
-        <div>
-            <div class="inline css-time-col-title"><span class="css-time-log-title"><b>Title</b></span></div>
-            <!--ko foreach: $parent.days-->
-            <div class="css-time-col inline">
-                <span class="css-time-log-title"><b data-bind="text:$data"></b></span>
-            </div>
-            <!--/ko-->
-        </div>
-        <!--ko foreach: $data -->
-        <div class="css-timelog-item">
-            <div class="css-time-col-title inline">
-                <span class="css-day-time" style="width: 95%" data-bind="text:Title"></span>
-            </div>
-            <div class="css-time-col inline">
-                <span class="css-day-time" data-bind="text:HoursInMonday"></span>
-            </div>
-            <div class="css-time-col inline">
-                <span class="css-day-time" data-bind="text:HoursInTuesday"></span>
-            </div>
-            <div class="css-time-col inline">
-                <span class="css-day-time" data-bind="text:HoursInWednesday"></span>
-            </div>
-            <div class="css-time-col inline">
-                <span class="css-day-time" data-bind="text:HoursInThursday"></span>
-            </div>
-            <div class="css-time-col inline">
-                <span class="css-day-time" data-bind="text:HoursInFriday"></span>
-            </div>
-            <div class="css-time-col inline">
-                <span class="css-day-time" data-bind="text:HoursInSaturday"></span>
-            </div>
-            <div class="css-time-col inline">
-                <span class="css-day-time" data-bind="text:HoursInSunday"></span>
-            </div>
-            <div class="css-time-col-btn inline">
-                <a class="inline" data-bind="attr: { href: '/Task/Index/'}">Edit</a>
-                <a class="inline" data-bind="attr: { href: '/Task/Index/' }">Remove</a>
-            </div>
-        </div>
-        <!--/ko-->
-        
-        <!--ko template: {name: 'ko-new-timelog', if: $parent.isCreateOpen, data:$parent }-->
-        <!--/ko-->
-    </script>
-
-    <script type="text/html" id="ko-new-timelog">
-        <form data-bind="submit:submitCreate">
-            <div class="css-timelog-item">
-                <div class="css-time-col-title inline">
-                    <input class="css-day-time" style="width: 95%" name="Title" />
-                </div>
-                <div class="css-time-col inline">
-                    <input class="css-day-time" name="HoursInMonday" />
-                </div>
-                <div class="css-time-col inline">
-                    <input class="css-day-time" name="HoursInTuesday" />
-                </div>
-                <div class="css-time-col inline">
-                    <input class="css-day-time" name="HoursInWednesday" />
-                </div>
-                <div class="css-time-col inline">
-                    <input class="css-day-time" name="HoursInThursday" />
-                </div>
-                <div class="css-time-col inline">
-                    <input class="css-day-time" name="HoursInFriday" />
-                </div>
-                <div class="css-time-col inline">
-                    <input class="css-day-time" name="HoursInSaturday" />
-                </div>
-                <div class="css-time-col inline">
-                    <input class="css-day-time" name="HoursInSunday" />
-                </div>
-                <div class="css-time-col-btn inline">
-                    <input class="inline formbutton" type="submit" value="Save" />
-                    <a href="#" class="inline" data-bind="event: {click: function(){ isCreateOpen(false); clean(); }}">Cancel</a>
-                </div>
-            </div>
-        </form>
-    </script>
 }

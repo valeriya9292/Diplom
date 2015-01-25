@@ -20,6 +20,9 @@
         getTimelogs: function (data, callback) {
             return $.get(pms.timelogs.dataManager.urls.getTimelogs, data, callback);
         },
+        deleteTimelog: function (data, callback) {
+            $.get(pms.timelogs.dataManager.urls.deleteTimelog, data, callback);
+        }
        
     });
 

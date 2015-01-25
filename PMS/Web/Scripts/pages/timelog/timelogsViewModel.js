@@ -7,6 +7,7 @@
         this._dataManager = options.dataManager || new local.dataManager();
 
         this.isWeekPickerVisible = ko.observable(false);
+     
         this.errorMsg = ko.observable();
 
         this.weekpicker = ko.observable();
@@ -14,6 +15,7 @@
         this.endDate = ko.observable();
 
         this.timelogs = ko.observableArray(options.timelogs);
+        this.deleteContent = ko.observable({ title: ""});
         //$.each(options.timelogs, function (i, v) {
         //    self.timelogs.push(new pms.timelogs.timelogViewModel(v));
         //});
@@ -21,6 +23,7 @@
         //this.newTimelog = ko.observable(new pms.timelogs.timelogViewModel({}));
 
         this.isCreateOpen = ko.observable(false);
+        this.isDeleteOpen = ko.observable(false);
 
         this.days = ['Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -37,6 +40,11 @@
             });
         };
 
+        this.openDelete = function (data) {
+            self.deleteContent(data);
+            self.isDeleteOpen(true);
+        };
+
         this.submitCreate = function (form) {
             var formData = new FormData($(form)[0]);
             formData.append("startDate", self.startDate());
@@ -49,6 +57,13 @@
                     self.timelogs.push(response);
                     self.isCreateOpen(false);
                 }
+            });
+        };
+        this.deleteTimelog = function (id) {
+            self._dataManager.deleteTimelog(id, function (response) {
+                var item = $.grep(self.timelogs(), function (val) { return val.Id == response.id; })[0];
+                self.timelogs.remove(item);
+                self.isDeleteOpen(false);
             });
         };
         this.clean = function() {
