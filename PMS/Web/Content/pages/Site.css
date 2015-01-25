@@ -567,12 +567,12 @@ tr:nth-child(odd) {
     width: 260px;
 }
 
-.css-project-item, .css-task-item {
+.css-project-item, .css-task-item, .css-timelog-item {
     border-bottom: solid 1px gray;
     padding: 10px 0px;
 }
 
-.css-project-prop-title, .css-task-prop-title {
+.css-project-prop-title, .css-task-prop-title, .css-time-log-title {
     font-size: 11px;
     color: gray;
 }
@@ -613,4 +613,19 @@ tr:nth-child(odd) {
 }
 .capitalize {
     text-transform: capitalize;
+}
+.css-day-time {
+    width: 35px;
+}
+.week-picker {
+    position: absolute; 
+}
+.css-time-col {
+    width: 7%;
+}
+.css-time-col-title {
+    width: 30%;
+}
+.css-time-col-btn {
+    width: 14%;
 }

@@ -1,52 +1,61 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using BLL.DomainModel.Entities;
+using BLL.Services;
 
 namespace Web.Controllers
 {
     public class TimeLogController : BaseController
     {
-        //
-        // GET: /TimeLog/
+        private readonly TimeLogService service;
+        private readonly UserService userService;
 
         public ActionResult Index()
         {
             return View();
         }
 
+        public TimeLogController(TimeLogService service, UserService userService)
+        {
+            this.service = service;
+            this.userService = userService;
+        }
         //
         // GET: /TimeLog/Details/5
 
-        public ActionResult Details(int id)
+        public ActionResult GetTimelogs()
         {
-            return View();
+            var weekNumber = WeekOfYearISO8601(DateTime.Today);
+            var timelogs = service.FindTimeLogsByUserId(CurrentUser.Id, weekNumber, DateTime.Today.Year);
+
+            return Json(new { timelogs }, JsonRequestBehavior.AllowGet);
         }
 
         //
         // GET: /TimeLog/Create
 
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /TimeLog/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(TimeLog timelog, DateTime startDate)
         {
             try
             {
-                // TODO: Add insert logic here
+                timelog.UserId = CurrentUser.Id;
+                timelog.Week = WeekOfYearISO8601(startDate);
+                timelog.Year = startDate.Year;
 
-                return RedirectToAction("Index");
+                var savedTimelogId = service.SaveTimeLog(timelog);
+                var savedTimelog = service.FindTimeLogById(savedTimelogId);
+
+                return Json(savedTimelog, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return View();
+                return Json(new { error = "Sorry! Timelog was not saved =(" }, JsonRequestBehavior.AllowGet);
             }
         }
 
@@ -100,6 +109,17 @@ namespace Web.Controllers
             {
                 return View();
             }
+        }
+
+        private static int WeekOfYearISO8601(DateTime date)
+        {
+            var day = (int)CultureInfo.CurrentCulture.Calendar.GetDayOfWeek(date);
+            return CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(date.AddDays(4 - (day == 0 ? 7 : day)), CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+        }
+
+        private User CurrentUser
+        {
+            get { return userService.FindUserByLogin(User.Identity.Name); }
         }
     }
 }

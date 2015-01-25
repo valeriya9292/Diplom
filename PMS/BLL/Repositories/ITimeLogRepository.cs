@@ -12,10 +12,10 @@ namespace BLL.Repositories
         //todo:remove unused
         TimeLog FindById(int id);
 
-        IEnumerable<TimeLog> FindByUserId(int userId);
+        IEnumerable<TimeLog> FindByUserId(int userId, int week, int year);
 
         void Delete(int timeLogId);
 
-        void Save(TimeLog timeLog);
+        int Save(TimeLog timeLog);
     }
 }

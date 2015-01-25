@@ -13,24 +13,24 @@ namespace BLL.Services
             this.repository = repository;
         }
 
-        TimeLog FindTimeLogById(int id)
+        public TimeLog FindTimeLogById(int id)
         {
             return repository.FindById(id);
         }
 
-        IEnumerable<TimeLog> FindTimeLogsByUserId(int userId)
+        public IEnumerable<TimeLog> FindTimeLogsByUserId(int userId, int week, int year)
         {
-            return repository.FindByUserId(userId);
+            return repository.FindByUserId(userId, week, year);
         }
 
-        void DeleteTimeLog(int timeLogId)
+        public void DeleteTimeLog(int timeLogId)
         {
             repository.Delete(timeLogId);
         }
 
-        void SaveTimeLog(TimeLog timeLog)
+        public int SaveTimeLog(TimeLog timeLog)
         {
-            repository.Save(timeLog);
+            return repository.Save(timeLog);
         }
     }
 }

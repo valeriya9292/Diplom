@@ -16,6 +16,7 @@
                 }
                 var startDateValue = allBindings.get('startDateValue');
                 var endDateValue = allBindings.get('endDateValue');
+                var visibleTrigger = allBindings.get('visible');
 
                 $el.datepicker({
                     showOtherMonths: true,
@@ -28,6 +29,7 @@
                         startDateValue($.datepicker.formatDate(dateFormat, startDate, inst.settings));
                         endDateValue($.datepicker.formatDate(dateFormat, endDate, inst.settings));
                         selectCurrentWeek();
+                        visibleTrigger(false);
                     },
                     beforeShowDay: function (date) {
                         var cssClass = '';

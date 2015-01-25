@@ -19,11 +19,13 @@ namespace DAL.ORM.Repositories
             }
         }
 
-        public IEnumerable<TimeLog> FindByUserId(int userId)
+        public IEnumerable<TimeLog> FindByUserId(int userId, int week, int year)
         {
             using (var context = new PmsDbContext())
             {
-                return context.TimeLogs.Where(it => it.UserId == userId).Select(it => it.ToEntityTimeLog());
+                return context.TimeLogs.AsEnumerable()
+                    .Where(it => it.UserId == userId && it.Week == week && it.Year == year)
+                    .Select(it => it.ToEntityTimeLog()).ToList();
             }
         }
 
@@ -38,13 +40,15 @@ namespace DAL.ORM.Repositories
             }
         }
 
-        public void Save(TimeLog timeLog)
+        public int Save(TimeLog timeLog)
         {
             using (var context = new PmsDbContext())
             {
+                OrmTimeLog savedTimelog;
                 var oldTimeLog = context.TimeLogs.FirstOrDefault(u => u.Id == timeLog.Id);
                 if (oldTimeLog != null)
                 {
+                    savedTimelog = oldTimeLog;
                     oldTimeLog.HoursInMonday = timeLog.HoursInMonday;
                     oldTimeLog.HoursInTuesday = timeLog.HoursInThursday;
                     oldTimeLog.HoursInWednesday = timeLog.HoursInWednesday;
@@ -61,10 +65,11 @@ namespace DAL.ORM.Repositories
                 }
                 else
                 {
-                    context.TimeLogs.Add(timeLog.ToOrmTimeLog());
+                    savedTimelog = context.TimeLogs.Add(timeLog.ToOrmTimeLog());
                 }
                 context.SaveChanges();
-            }
+                return savedTimelog.Id;
+            }          
         }
     }
 }

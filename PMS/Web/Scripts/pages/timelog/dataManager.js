@@ -3,9 +3,9 @@
     pms.timelogs.dataManager = function () { };
 
     $.extend(pms.timelogs.dataManager.prototype, {
-        createTask: function (data, callback) {
+        createTimelog: function (data, callback) {
             return $.ajax({
-                url: pms.tasks.dataManager.urls.createTask,
+                url: pms.timelogs.dataManager.urls.createTimelog,
                 type: 'POST',
                 data: data,
                 async: false,

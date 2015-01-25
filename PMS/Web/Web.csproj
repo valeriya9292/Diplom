@@ -272,6 +272,7 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Scripts\customKO\ko.bindings.numeric.js" />
     <None Include="Scripts\lib\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\body.png" />
     <Content Include="Images\avatar.png" />
@@ -310,6 +311,7 @@
     <Content Include="Scripts\pages\task\tasksViewModel.js" />
     <Content Include="Scripts\pages\task\taskValidate.js" />
     <Content Include="Scripts\pages\timelog\dataManager.js" />
+    <Content Include="Scripts\pages\timelog\timelogViewModel.js" />
     <Content Include="Scripts\pages\timelog\timelogsViewModel.js" />
     <Content Include="Scripts\pages\user\createUser.js" />
     <Content Include="Scripts\pages\user\dataManager.js" />
@@ -365,7 +367,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -374,6 +375,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{28e58d2b-29e0-4cf0-8933-2c1daea2b027}</Project>
       <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL.ORM\DAL.ORM.csproj">
+      <Project>{B53DD793-5D0E-4294-A143-D5EEB9445913}</Project>
+      <Name>DAL.ORM</Name>
     </ProjectReference>
     <ProjectReference Include="..\DI\DI.csproj">
       <Project>{50439242-38d4-4535-b4b4-88ad8053a2aa}</Project>
