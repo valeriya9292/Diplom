@@ -1,0 +1,34 @@
+﻿<script type="text/html" id="ko-timelog-item">
+    <div class="css-timelog-item">
+        <div class="css-time-col-title inline">
+            <span class="css-day-time" style="width: 95%" data-bind="text:Title"></span>
+        </div>
+        <div class="css-time-col inline">
+            <span class="css-day-time" data-bind="text:HoursInMonday"></span>
+        </div>
+        <div class="css-time-col inline">
+            <span class="css-day-time" data-bind="text:HoursInTuesday"></span>
+        </div>
+        <div class="css-time-col inline">
+            <span class="css-day-time" data-bind="text:HoursInWednesday"></span>
+        </div>
+        <div class="css-time-col inline">
+            <span class="css-day-time" data-bind="text:HoursInThursday"></span>
+        </div>
+        <div class="css-time-col inline">
+            <span class="css-day-time" data-bind="text:HoursInFriday"></span>
+        </div>
+        <div class="css-time-col inline">
+            <span class="css-day-time" data-bind="text:HoursInSaturday"></span>
+        </div>
+        <div class="css-time-col inline">
+            <span class="css-day-time" data-bind="text:HoursInSunday"></span>
+        </div>
+        <div class="css-time-col-btn inline">
+            <a class="inline" href="#" data-bind="event: { click: function(){ $parents[1].openEdit()}}">Edit</a>
+            <a class="inline" href="#" data-bind="event: { click: function(){ $parents[1].openDelete({id: Id, title:Title})}}">Delete</a>
+        </div>
+    </div>
+    <!--ko tempate: { name: "ko-new-timelog", foreach: $data } -->
+    <!--/ko-->
+</script>

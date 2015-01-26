@@ -1,0 +1,35 @@
+﻿<script type="text/html" id="ko-edit-timelog">
+    <form data-bind="submit: $parents[1].submitEdit">
+        <div class="css-timelog-item">
+            <input type="hidden" data-bind="value: Id" name="Id"/>
+            <div class="css-time-col-title inline">
+                <input class="css-day-time" style="width: 95%" name="Title" data-bind="value:Title" />
+            </div>
+            <div class="css-time-col inline">
+                <input class="css-day-time" name="HoursInMonday" data-bind="value:HoursInMonday" />
+            </div>
+            <div class="css-time-col inline">
+                <input class="css-day-time" name="HoursInTuesday" data-bind="value:HoursInTuesday" />
+            </div>
+            <div class="css-time-col inline">
+                <input class="css-day-time" name="HoursInWednesday" data-bind="value:HoursInWednesday" />
+            </div>
+            <div class="css-time-col inline">
+                <input class="css-day-time" name="HoursInThursday" data-bind="value:HoursInThursday" />
+            </div>
+            <div class="css-time-col inline">
+                <input class="css-day-time" name="HoursInFriday" data-bind="value:HoursInFriday" />
+            </div>
+            <div class="css-time-col inline">
+                <input class="css-day-time" name="HoursInSaturday" data-bind="value:HoursInSaturday" />
+            </div>
+            <div class="css-time-col inline">
+                <input class="css-day-time" name="HoursInSunday" data-bind="value:HoursInSunday" />
+            </div>
+            <div class="css-time-col-btn inline">
+                <input class="inline formbutton" type="submit" value="Save" />
+                <a href="#" class="inline" data-bind="event: {click: function(){ isTimelogEditOpen(false); $parents[1].clean(); }}">Cancel</a>
+            </div>
+        </div>
+    </form>
+</script>

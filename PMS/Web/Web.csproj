@@ -367,6 +367,8 @@
     <Content Include="Views\TimeLog\Delete.cshtml" />
     <Content Include="Views\TimeLog\CreateTimelog.cshtml" />
     <Content Include="Views\TimeLog\Timelog.cshtml" />
+    <Content Include="Views\TimeLog\TimelogItem.cshtml" />
+    <Content Include="Views\TimeLog\EditTimelog.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

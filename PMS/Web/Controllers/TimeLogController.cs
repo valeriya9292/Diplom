@@ -22,9 +22,9 @@ namespace Web.Controllers
             this.userService = userService;
         }
 
-        public ActionResult GetTimelogs()
+        public ActionResult GetTimelogs(DateTime? startDate)
         {
-            var weekNumber = WeekOfYearISO8601(DateTime.Today);
+            var weekNumber = WeekOfYearISO8601(startDate ?? DateTime.Today);
             var timelogs = service.FindTimeLogsByUserId(CurrentUser.Id, weekNumber, DateTime.Today.Year);
 
             return Json(new { timelogs }, JsonRequestBehavior.AllowGet);
@@ -46,25 +46,6 @@ namespace Web.Controllers
             catch
             {
                 return Json(new { error = "Sorry! Timelog was not saved =(" }, JsonRequestBehavior.AllowGet);
-            }
-        }
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
             }
         }
         public ActionResult Delete(int id)

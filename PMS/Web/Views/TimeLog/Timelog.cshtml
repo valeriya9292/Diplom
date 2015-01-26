@@ -7,38 +7,40 @@
         </div>
         <!--/ko-->
     </div>
-    <!--ko foreach: $data -->
-    <div class="css-timelog-item">
-        <div class="css-time-col-title inline">
-            <span class="css-day-time" style="width: 95%" data-bind="text:Title"></span>
+    <div data-bind="foreach: $data">
+        <div class="css-timelog-item" data-bind="visible: !isTimelogEditOpen()">
+            <div class="css-time-col-title inline">
+                <span class="css-day-time" style="width: 95%" data-bind="text:Title"></span>
+            </div>
+            <div class="css-time-col inline">
+                <span class="css-day-time" data-bind="text:HoursInMonday"></span>
+            </div>
+            <div class="css-time-col inline">
+                <span class="css-day-time" data-bind="text:HoursInTuesday"></span>
+            </div>
+            <div class="css-time-col inline">
+                <span class="css-day-time" data-bind="text:HoursInWednesday"></span>
+            </div>
+            <div class="css-time-col inline">
+                <span class="css-day-time" data-bind="text:HoursInThursday"></span>
+            </div>
+            <div class="css-time-col inline">
+                <span class="css-day-time" data-bind="text:HoursInFriday"></span>
+            </div>
+            <div class="css-time-col inline">
+                <span class="css-day-time" data-bind="text:HoursInSaturday"></span>
+            </div>
+            <div class="css-time-col inline">
+                <span class="css-day-time" data-bind="text:HoursInSunday"></span>
+            </div>
+            <div class="css-time-col-btn inline">
+                <a class="inline" href="#" data-bind="event: { click: function(){ isTimelogEditOpen(true) } }">Edit</a>
+                <a class="inline" href="#" data-bind="event: { click: function(){ $parents[1].openDelete({id: Id, title:Title})}}">Delete</a>
+            </div>
         </div>
-        <div class="css-time-col inline">
-            <span class="css-day-time" data-bind="text:HoursInMonday"></span>
-        </div>
-        <div class="css-time-col inline">
-            <span class="css-day-time" data-bind="text:HoursInTuesday"></span>
-        </div>
-        <div class="css-time-col inline">
-            <span class="css-day-time" data-bind="text:HoursInWednesday"></span>
-        </div>
-        <div class="css-time-col inline">
-            <span class="css-day-time" data-bind="text:HoursInThursday"></span>
-        </div>
-        <div class="css-time-col inline">
-            <span class="css-day-time" data-bind="text:HoursInFriday"></span>
-        </div>
-        <div class="css-time-col inline">
-            <span class="css-day-time" data-bind="text:HoursInSaturday"></span>
-        </div>
-        <div class="css-time-col inline">
-            <span class="css-day-time" data-bind="text:HoursInSunday"></span>
-        </div>
-        <div class="css-time-col-btn inline">
-            <a class="inline" data-bind="attr: { href: '/Task/Index/'}">Edit</a>
-            <a class="inline" href="#" data-bind="event: { click: function(){ $parents[1].openDelete({id: Id, title:Title})}}">Delete</a>
+        <div data-bind="template: { name: 'ko-edit-timelog', if: isTimelogEditOpen}">
         </div>
     </div>
-    <!--/ko-->
-    <!--ko template: {name: 'ko-new-timelog', if: $parent.isCreateOpen, data:$parent }-->
-    <!--/ko-->
+        <!--ko template: {name: 'ko-new-timelog', if: $parent.isCreateOpen, data:$parent }-->
+        <!--/ko-->
 </script>

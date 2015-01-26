@@ -26,9 +26,10 @@
     <div data-bind="template: {name: 'ko-deleteForm', data: deleteContent, if:isDeleteOpen}"></div>
 </div>
 @{
-    Html.RenderPartial("CreateTimelog");
     Html.RenderPartial("Delete");
+    Html.RenderPartial("CreateTimelog");
     Html.RenderPartial("Timelog");
+    Html.RenderPartial("EditTimelog");
 }
 
 @section Scripts{
@@ -36,18 +37,19 @@
     <script type="text/javascript">
         var pms = { timelogs: { dataManager: {} } };
 
-        $(document).ready(function () {
+        $(document).ready(function() {
             pms.timelogs.dataManager.urls = {
                 getTimelogs: '@Url.Action("GetTimelogs", "TimeLog")',
                 createTimelog: '@Url.Action("Create", "TimeLog")',
                 deleteTimelog: '@Url.Action("Delete", "TimeLog")',
             };
 
-            var dataManager = new pms.timelogs.dataManager();
-            dataManager.getTimelogs(function (timelogs) {
-                var model = new pms.timelogs.timelogsViewModel(timelogs);
-                ko.applyBindings(model);
-            });
+            // var dataManager = new pms.timelogs.dataManager();
+            //dataManager.getTimelogs(function (timelogs) {
+
+            //});
+            var model = new pms.timelogs.timelogsViewModel({});
+            ko.applyBindings(model);
         });
     </script>
     @Scripts.Render("~/bundles/timelogs")
