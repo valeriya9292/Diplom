@@ -5,6 +5,7 @@
 }
 
 <h2>Details</h2>
+
 <div class="css-link">
     @Html.ActionLink("Back to List", "Index")
 </div>
@@ -60,6 +61,8 @@
     var model;
 
     $(document).ready(function () {
+        $(".js-menu-profile", "nav").addClass("selected");
+
         pms.users.dataManager.urls = {
             getUserJson: '@Url.Action("Get", "User")',
             editUser: '@Url.Action("Edit", "User")',

@@ -37,6 +37,8 @@
         var pms = { projects: { dataManager: {} } };
 
         $(document).ready(function () {
+            $(".js-menu-projects", "nav").addClass("selected");
+
             pms.projects.dataManager.urls = {
                 getProjects: '@Url.Action("GetProjects", "Project")',
                 createProject: '@Url.Action("Create", "Project")',

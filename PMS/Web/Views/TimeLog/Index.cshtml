@@ -37,7 +37,9 @@
     <script type="text/javascript">
         var pms = { timelogs: { dataManager: {} } };
 
-        $(document).ready(function() {
+        $(document).ready(function () {
+            $(".js-menu-timelogs", "nav").addClass("selected");
+
             pms.timelogs.dataManager.urls = {
                 getTimelogs: '@Url.Action("GetTimelogs", "TimeLog")',
                 createTimelog: '@Url.Action("Create", "TimeLog")',

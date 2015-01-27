@@ -5,7 +5,7 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Users</h2>
 
 <p>
     <a href="#" data-bind="event: { click: openCreate}">Create New</a>
@@ -41,6 +41,9 @@
         var model;
 
         $(document).ready(function () {
+
+            $(".js-menu-users", "nav").addClass("selected");
+            
             pms.users.dataManager.urls = {
                 getUserJson: '@Url.Action("Get", "User")',
                 deleteUser: '@Url.Action("Delete", "User")',

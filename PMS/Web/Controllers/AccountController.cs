@@ -36,9 +36,7 @@ namespace Web.Controllers
                         return Redirect(returnUrl);
                     }
                     var roleProvider = new CustomRoleProvider();
-                    return (roleProvider.IsUserInRole(viewModel.Login, Role.ProjectManager) || roleProvider.IsUserInRole(viewModel.Login, Role.Admin)) ?
-                            RedirectToAction("Index", "Project")
-                        : RedirectToAction("Details", "User");
+                    return RedirectToAction("Index", "Project");
                 }
                 ModelState.AddModelError("", "Incorrect login or password");
             }
